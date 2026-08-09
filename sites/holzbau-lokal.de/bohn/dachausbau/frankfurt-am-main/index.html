@@ -31,7 +31,7 @@
     .breadcrumb span { opacity: .35; }
 
     /* ARTICLE */
-    article { max-width: 900px; margin: 0 auto; padding: 32px 32px 80px; }
+    article { max-width: 900px; margin: 0 auto; padding: 32px 32px 32px; }
 
     /* SECTION LABEL */
     .section-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
@@ -132,7 +132,8 @@
     .btn-gold:hover { background: var(--gold2); opacity: 1; }
 
     /* SERVICE AREA */
-    .service-area { background: var(--bg2); border-top: 1px solid var(--border); padding: 18px 32px; max-width: 900px; margin: 0 auto; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .service-area { background: var(--bg2); border-top: 1px solid var(--border); padding: 18px 32px; max-width: 900px; margin: 0 auto 32px; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); line-height: 1.7; display: flex; align-items: flex-start; gap: 8px; }
+    .service-area svg { flex-shrink: 0; margin-top: 2px; color: var(--muted); }
     .service-area strong { color: var(--text); }
 
     /* FOOTER */
@@ -366,7 +367,8 @@ Die Verbindung aus traditionellem Handwerk und moderner Bauphysik kreiert Räume
 
 <!-- SERVICE AREA -->
 <div class="service-area">
-  <strong>Expertise und Leistungen verfügbar in:</strong> Rhein-Main (Region) · Taunus · Darmstadt · Frankfurt am Main · Wiesbaden · Offenbach · Hanau · Bad Homburg
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <span><strong>Expertise und Leistungen verfügbar in:</strong> Rhein-Main (Region) · Taunus · Darmstadt · Frankfurt am Main · Wiesbaden · Offenbach · Hanau · Bad Homburg</span>
 </div>
 
 <!-- FOOTER -->
