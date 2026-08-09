@@ -47,8 +47,10 @@
     .hero-name { font-size: clamp(28px,3.5vw,42px); font-weight: 400; color: var(--black); line-height: 1.15; margin-bottom: 8px; }
     .hero-title { font-family: Arial,sans-serif; font-size: 16px; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
     .hero-specialty { font-family: Arial,sans-serif; font-size: 15px; color: var(--muted); margin-bottom: 6px; }
-    .hero-location { display: flex; align-items: center; gap: 8px; font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-    .hero-location::before { content: ""; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .hero-meta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+    .hero-meta-item { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta-item svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .hero-meta-divider { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; opacity: .45; }
     .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
     .btn-primary:hover { background: var(--gold); opacity: 1; }
     .hero-lap-link { font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); margin-top: 16px; display: block; }
@@ -57,7 +59,9 @@
     /* DREI KARTEN */
     .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 48px; }
     .info-card { background: var(--white); padding: 28px 28px; }
-    .info-card-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .info-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .info-card-header svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .info-card-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
     .info-table { width: 100%; border-collapse: collapse; }
     .info-table td { font-family: Arial,sans-serif; font-size: 14px; padding: 7px 0; border-bottom: 1px solid var(--bg2); vertical-align: top; }
     .info-table td:first-child { color: var(--muted); width: 44%; padding-right: 10px; font-size: 13px; }
@@ -160,7 +164,11 @@
         <div class="hero-name">Alexander Bohn</div>
         <div class="hero-title">Geschäftsführer, Dachdeckermeister & Zimmermann</div>
         <div class="hero-specialty">Wohnraumerweiterung bei Bestandsimmobilien</div>
-        <div class="hero-location">Frankfurt am Main · Holzbau</div>
+        <div class="hero-meta">
+          <span class="hero-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Frankfurt am Main</span>
+          <span class="hero-meta-divider"></span>
+          <span class="hero-meta-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> Holzbau</span>
+        </div>
       </div>
       <div>
         <a href="/bohn/kontakt/" class="btn-primary">Jetzt Kontakt aufnehmen →</a>
@@ -172,7 +180,7 @@
   <!-- DREI INFO-KARTEN -->
   <div class="info-grid">
     <div class="info-card">
-      <div class="info-card-label">Unternehmen</div>
+      <div class="info-card-header"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span class="info-card-label">Unternehmen</span></div>
       <table class="info-table">
         <tr><td>Firma</td><td>Bohn Holzbau GmbH</td></tr>
         <tr><td>Branche</td><td>Holzbau</td></tr>
@@ -181,13 +189,13 @@
       </table>
     </div>
     <div class="info-card">
-      <div class="info-card-label">Zertifikate &amp; Auszeichnungen</div>
+      <div class="info-card-header"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span class="info-card-label">Zertifikate &amp; Auszeichnungen</span></div>
       <div class="tag-list">
         <div class="tag">Meisterbetrieb</div><div class="tag">RAL Gütezeichen Holzschaffen</div><div class="tag">FSC-zertifiziert</div>
       </div>
     </div>
     <div class="info-card">
-      <div class="info-card-label">Hauptleistungen</div>
+      <div class="info-card-header"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span class="info-card-label">Hauptleistungen</span></div>
       <div class="tag-list">
         <div class="tag">Holzbau</div><div class="tag">Aufstockung</div><div class="tag">Anbau</div><div class="tag">Holzrahmenbau</div><div class="tag">Dachausbau</div><div class="tag">energetische Sanierung</div><div class="tag">Carport</div><div class="tag">Gewerbebau</div>
       </div>
