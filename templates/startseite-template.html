@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <title>{{platform_title}}</title>
   <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root { --black:#141414; --gold:#C9A43A; --gold2:#DFB84E; --bg:#FAFAF7; --bg2:#F0EFE9; --border:#E2E0D8; --text:#242424; --muted:#6B6B6B; --white:#FFFFFF; }
@@ -15,46 +14,71 @@ nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 
 .nav-links { display:flex; align-items:center; gap:28px; }
 .nav-links a { font-family:Arial,sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
 .nav-links a:hover { color:var(--black); opacity:1; }
-.breadcrumb { max-width:900px; margin:0 auto; padding:16px 32px 0; font-family:Arial,sans-serif; font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-.breadcrumb a { color:var(--muted); }
-.breadcrumb a:hover { color:var(--gold); opacity:1; }
-.breadcrumb span { opacity:.35; }
-article { max-width:900px; margin:0 auto; padding:32px; }
-.hero-eyebrow { font-family:Arial,sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.hero { position:relative; width:100%; height:clamp(320px,50vh,520px); overflow:hidden; background:var(--black); }
+.hero-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.25) 100%); display:flex; align-items:flex-end; }
+.hero-inner { max-width:900px; margin:0 auto; width:100%; padding:0 32px 48px; }
+.hero-eyebrow { font-family:Arial,sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
 .hero-eyebrow::before { content:""; width:28px; height:2px; background:var(--gold); display:block; }
-h1 { font-size:clamp(26px,4vw,40px); font-weight:400; line-height:1.2; color:var(--black); margin-bottom:16px; letter-spacing:-.3px; }
-.hero-subtitle { font-family:Arial,sans-serif; font-size:17px; color:var(--muted); line-height:1.65; margin-bottom:20px; max-width:700px; }
+.hero h1 { font-size:clamp(28px,5vw,48px); font-weight:400; line-height:1.15; color:var(--white); margin-bottom:14px; letter-spacing:-.3px; }
+.hero-subtitle { font-family:Arial,sans-serif; font-size:18px; color:rgba(255,255,255,.85); line-height:1.6; max-width:700px; }
+article { max-width:900px; margin:0 auto; padding:48px 32px; }
 h2 { font-size:clamp(20px,2.8vw,28px); font-weight:400; color:var(--black); margin-bottom:20px; line-height:1.3; }
 h3 { font-family:Arial,sans-serif; font-size:16px; font-weight:700; color:var(--black); margin-bottom:10px; margin-top:28px; }
 p { margin-bottom:20px; }
 p:last-child { margin-bottom:0; }
-.content-body { margin-top:8px; }
 .content-body h2 { margin-top:36px; }
-hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
 .service-area { background:var(--bg2); border-top:1px solid var(--border); padding:18px 24px; margin:32px 0 0; font-family:Arial,sans-serif; font-size:13px; color:var(--muted); line-height:1.7; display:flex; align-items:flex-start; gap:8px; }
 .service-area svg { flex-shrink:0; margin-top:2px; color:var(--muted); }
 .service-area strong { color:var(--text); }
+.form-section { background:var(--black); padding:64px 32px; }
+.form-section-inner { max-width:640px; margin:0 auto; }
+.form-section h2 { font-size:clamp(24px,3vw,32px); font-weight:400; color:var(--white); margin-bottom:10px; line-height:1.3; }
+.form-intro { font-family:Arial,sans-serif; font-size:15px; color:rgba(255,255,255,.65); margin-bottom:28px; line-height:1.55; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px; }
+.form-group { margin-bottom:12px; }
+.form-group label { display:block; font-family:Arial,sans-serif; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:5px; }
+.form-group input, .form-group textarea { width:100%; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05); color:var(--white); font-family:Arial,sans-serif; font-size:15px; padding:12px 14px; outline:none; border-radius:0; appearance:none; transition:border-color .2s; resize:vertical; }
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,.35); }
+.form-group input:focus, .form-group textarea:focus { border-color:var(--gold); }
+.form-group textarea { min-height:100px; }
+.form-consent { display:flex; gap:12px; align-items:flex-start; margin:14px 0 20px; }
+.form-consent input[type=checkbox] { margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--gold); cursor:pointer; }
+.form-consent label { font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,.55); line-height:1.55; cursor:pointer; }
+.btn-submit { width:100%; background:var(--gold); color:var(--black); font-family:Arial,sans-serif; font-size:15px; font-weight:700; letter-spacing:1px; padding:15px; border:none; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+.btn-submit:hover { background:var(--gold2); }
+.form-note { font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,.4); margin-top:14px; text-align:center; }
 footer { background:var(--white); border-top:1px solid var(--border); padding:28px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
 .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
 .footer-links a { font-family:Arial,sans-serif; font-size:13px; color:var(--muted); }
 .footer-links a:hover { color:var(--black); opacity:1; }
 .footer-note { font-family:Arial,sans-serif; font-size:12px; color:#C0C0C0; }
-@media (max-width:700px) { nav { padding:0 20px; } article { padding:24px 20px 60px; } footer { padding:24px 20px; } }</style>
+@media (max-width:700px) { nav { padding:0 20px; } .hero { height:clamp(280px,40vh,380px); } .hero-inner { padding:0 20px 32px; } article { padding:32px 20px; } .form-section { padding:40px 20px; } .form-row { grid-template-columns:1fr; } footer { padding:24px 20px; } }</style>
 </head>
 <body>
 <nav>
   <a href="/">{{nav_logo_html}}</a>
   <div class="nav-links">
     <a href="/">Startseite</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
   </div>
 </nav>
+<section class="hero">
+  {{{hero_image_html}}}
+  <div class="hero-overlay">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">{{platform_title}}</div>
+      <h1>{{content_headline}}</h1>
+      <p class="hero-subtitle">{{content_subline}}</p>
+    </div>
+  </div>
+</section>
 <article>
-  <div class="hero-eyebrow">{{platform_title}}</div>
-  <h1>{{content_headline}}</h1>
-  <p class="hero-subtitle">{{content_subline}}</p>
   <div class="content-body">{{{content_html}}}</div>
   {{service_area_block}}
 </article>
+{{{form_section_html}}}
 <footer>
   <a href="/">{{footer_logo_html}}</a>
   <div class="footer-links">
