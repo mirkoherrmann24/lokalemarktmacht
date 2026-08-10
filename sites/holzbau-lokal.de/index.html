@@ -71,7 +71,7 @@ footer { background:var(--white); border-top:1px solid var(--border); padding:28
     <div class="hero-inner">
       <div class="hero-eyebrow">Holzbau Lokal</div>
       <h1>Holzbau Lokal — Experten-Beiträge aus der Region</h1>
-      <p class="hero-subtitle">Regionale Fachbeiträge, Projekt-Referenzen und Experten-Interviews rund um den Holzbau.</p>
+      <p class="hero-subtitle">Regionale Fachbeiträge, Projekt-Vorstellungen & Interviews rund um den Holzbau.</p>
     </div>
   </div>
 </section>
@@ -81,7 +81,7 @@ footer { background:var(--white); border-top:1px solid var(--border); padding:28
 <p>Deutschland fehlen über 700.000 Wohnungen. Gleichzeitig ist der Bausektor für 40 % der CO₂-Emissionen verantwortlich. Holzbau ist die einzige Bauweise, die beide Probleme gleichzeitig adressiert. Wer das erklären kann, sitzt am Tisch der Entscheider – nicht im Angebotswettbewerb.</p></div>
   
 </article>
-
+<section class="form-section"><div class="form-section-inner"><h2>Sie sind Experte und wollen gehört werden?</h2><form action="https://lokale-marktmacht-authority.base44.app/api/functions/receivePublicLead" method="POST"><input type="hidden" name="lead_source" value="Startseite"><input type="hidden" name="platform_domain" value="holzbau-lokal.de"><input type="hidden" name="_hp_company" value=""><div class="form-group"><label>Firmenname *</label><input type="text" name="company_name" placeholder="Ihre Firma" required></div><div class="form-row"><div class="form-group"><label>Vorname *</label><input type="text" name="vorname" placeholder="Ihr Vorname" required></div><div class="form-group"><label>Nachname *</label><input type="text" name="nachname" placeholder="Ihr Nachname" required></div></div><div class="form-row"><div class="form-group"><label>E-Mail *</label><input type="email" name="email" placeholder="ihre@email.de" required></div><div class="form-group"><label>Telefon</label><input type="tel" name="phone" placeholder="+49 ..."></div></div><div class="form-group"><label>Ihr Anliegen *</label><textarea name="project_description" placeholder="Worum geht es?" required></textarea></div><div class="form-consent"><input type="checkbox" id="consent" name="privacy_consent" required><label for="consent">Ich willige ein, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden.</label></div><button type="submit" class="btn-submit">Ja, ich will gehört werden</button></form></div></section>
 <footer>
   <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:30px;width:auto;display:block;"></a>
   <div class="footer-links">
@@ -90,5 +90,42 @@ footer { background:var(--white); border-top:1px solid var(--border); padding:28
   </div>
   <div class="footer-note">© 2026 Holzbau Lokal — Ein Projekt von Lokale Marktmacht</div>
 </footer>
+<script>
+(function(){
+  function init(){
+    var forms = document.querySelectorAll('form[action*="receivePublicLead"]');
+    forms.forEach(function(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var btn = form.querySelector('.btn-submit');
+        if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; }
+        var formData = new FormData(form);
+        fetch(form.action, { method: 'POST', body: formData })
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            if(data.success){
+              var msg = document.createElement('div');
+              msg.className = 'form-success';
+              msg.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Ihre Anfrage wurde erfolgreich übermittelt</h3><p>Wir melden uns schnellstmöglich bei Ihnen.</p>';
+              msg.style.cssText = 'text-align:center;padding:3rem 1.5rem;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;';
+              msg.querySelector('h3').style.cssText = 'font-size:1.25rem;font-weight:600;color:#15803d;margin:1rem 0 0.5rem;';
+              msg.querySelector('p').style.cssText = 'font-size:0.95rem;color:#16a34a;margin:0;';
+              form.parentNode.replaceChild(msg, form);
+            } else {
+              alert(data.error || 'Ein Fehler ist aufgetreten.');
+              if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+            }
+          })
+          .catch(function(){
+            alert('Netzwerkfehler — bitte versuchen Sie es erneut.');
+            if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+          });
+      });
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>
