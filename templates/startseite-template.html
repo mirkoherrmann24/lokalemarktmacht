@@ -87,5 +87,43 @@ footer { background:var(--white); border-top:1px solid var(--border); padding:28
   </div>
   <div class="footer-note">© {{year}} {{platform_title}} — Ein Projekt von Lokale Marktmacht</div>
 </footer>
+<script>
+(function(){
+  function init(){
+    var forms = document.querySelectorAll('form[action*="receivePublicLead"]');
+    forms.forEach(function(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var btn = form.querySelector('.btn-submit');
+        if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; }
+        var formData = new FormData(form);
+        fetch(form.action, { method: 'POST', body: formData })
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            if(data.success){
+              var expert = form.querySelector('input[name="expert_name"]') ? form.querySelector('input[name="expert_name"]').value : '';
+              var msg = document.createElement('div');
+              msg.className = 'form-success';
+              msg.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Ihre Anfrage wurde erfolgreich übermittelt</h3><p>' + (expert ? expert : 'Der Experte') + ' wird sich schnellstmöglich bei Ihnen melden.</p>';
+              msg.style.cssText = 'text-align:center;padding:3rem 1.5rem;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;';
+              msg.querySelector('h3').style.cssText = 'font-size:1.25rem;font-weight:600;color:#15803d;margin:1rem 0 0.5rem;';
+              msg.querySelector('p').style.cssText = 'font-size:0.95rem;color:#16a34a;margin:0;';
+              form.parentNode.replaceChild(msg, form);
+            } else {
+              alert(data.error || 'Ein Fehler ist aufgetreten.');
+              if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+            }
+          })
+          .catch(function(){
+            alert('Netzwerkfehler — bitte versuchen Sie es erneut.');
+            if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+          });
+      });
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>
