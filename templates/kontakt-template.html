@@ -181,7 +181,7 @@
     <p class="form-intro">{{form_intro_text}}</p>
 
     <form action="{{form_action_url}}" method="POST">
-      <input type="hidden" name="expert_id" value="{{expert_id}}">
+      <input type="hidden" name="customer_id" value="{{expert_id}}">
       <input type="hidden" name="expert_name" value="{{expert_name}}">
 
       <div class="form-row">
@@ -198,17 +198,17 @@
       <div class="form-row">
         <div class="form-group">
           <label>Telefon</label>
-          <input type="tel" name="telefon" placeholder="+49 ...">
+          <input type="tel" name="phone" placeholder="+49 ...">
         </div>
         <div class="form-group">
           <label>Ort des Projekts</label>
-          <input type="text" name="ort" placeholder="{{city}}">
+          <input type="text" name="project_location" placeholder="{{city}}">
         </div>
       </div>
 
       <div class="form-group">
         <label>Gewünschte Leistung</label>
-        <select name="leistung">
+        <select name="desired_service">
           <option value="">Bitte auswählen</option>
           {{#leistung_optionen}}<option value="{{value}}">{{label}}</option>{{/leistung_optionen}}
         </select>
@@ -216,16 +216,16 @@
 
       <div class="form-group">
         <label>Projektbeschreibung</label>
-        <textarea name="beschreibung" placeholder="Kurze Beschreibung Ihres Vorhabens ..."></textarea>
+        <textarea name="project_description" placeholder="Kurze Beschreibung Ihres Vorhabens ..."></textarea>
       </div>
 
       <div class="form-group">
         <label>Zeitrahmen</label>
-        <input type="text" name="zeitrahmen" placeholder="z. B. ab sofort, in 3 Monaten">
+        <input type="text" name="timeframe" placeholder="z. B. ab sofort, in 3 Monaten">
       </div>
 
       <div class="form-consent">
-        <input type="checkbox" id="consent" name="consent" required>
+        <input type="checkbox" id="consent" name="privacy_consent" required>
         <label for="consent">Ich willige ein, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden.</label>
       </div>
 
