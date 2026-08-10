@@ -35,7 +35,7 @@
 
     /* HERO CARD */
     .hero-card { display: grid; grid-template-columns: 380px 1fr; gap: 0; background: var(--white); border: 1px solid var(--border); margin-bottom: 32px; overflow: hidden; }
-    .hero-photo-col { position: relative; aspect-ratio: 1 / 1; }
+    .hero-photo-col { position: relative; height: 380px; align-self: start; }
     .hero-photo-col img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .hero-photo-col .photo-placeholder { width: 100%; height: 100%; background: linear-gradient(145deg, #C8BEA8, #9E9080); display: block; }
     .hero-info { padding: 44px 48px; display: flex; flex-direction: column; justify-content: space-between; }
@@ -113,6 +113,7 @@
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .hero-card { grid-template-columns: 1fr; }
+      .hero-photo-col { height: auto; aspect-ratio: 1 / 1; }
       .hero-photo-col img { min-height: 0; }
       .info-grid { grid-template-columns: 1fr; }
       .profil-artikel { grid-template-columns: 1fr; }
@@ -171,7 +172,6 @@
       </div>
       <div>
         <a href="{{contact_url}}" class="btn-primary">Jetzt Kontakt aufnehmen →</a>
-        <span class="hero-lap-link">Fachbeitrag lesen: <a href="{{lap_url}}">{{lap_title}}</a></span>
       </div>
     </div>
   </div>
