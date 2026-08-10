@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Impressum | {{platform_title}}</title>
+  <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --black:#141414; --gold:#C9A43A; --gold2:#DFB84E; --bg:#FAFAF7; --bg2:#F0EFE9; --border:#E2E0D8; --text:#242424; --muted:#6B6B6B; --white:#FFFFFF; }
+html { scroll-behavior:smooth; }
+body { font-family:Georgia,serif; background:var(--bg); color:var(--text); font-size:17px; line-height:1.8; }
+a { color:var(--gold); text-decoration:none; transition:opacity .2s; }
+a:hover { opacity:.75; }
+nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; }
+.nav-links { display:flex; align-items:center; gap:28px; }
+.nav-links a { font-family:Arial,sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.nav-links a:hover { color:var(--black); opacity:1; }
+.breadcrumb { max-width:900px; margin:0 auto; padding:16px 32px 0; font-family:Arial,sans-serif; font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.breadcrumb a { color:var(--muted); }
+.breadcrumb a:hover { color:var(--gold); opacity:1; }
+.breadcrumb span { opacity:.35; }
+article { max-width:900px; margin:0 auto; padding:32px; }
+.hero-eyebrow { font-family:Arial,sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.hero-eyebrow::before { content:""; width:28px; height:2px; background:var(--gold); display:block; }
+h1 { font-size:clamp(26px,4vw,40px); font-weight:400; line-height:1.2; color:var(--black); margin-bottom:16px; letter-spacing:-.3px; }
+.hero-subtitle { font-family:Arial,sans-serif; font-size:17px; color:var(--muted); line-height:1.65; margin-bottom:20px; max-width:700px; }
+h2 { font-size:clamp(20px,2.8vw,28px); font-weight:400; color:var(--black); margin-bottom:20px; line-height:1.3; }
+h3 { font-family:Arial,sans-serif; font-size:16px; font-weight:700; color:var(--black); margin-bottom:10px; margin-top:28px; }
+p { margin-bottom:20px; }
+p:last-child { margin-bottom:0; }
+.content-body { margin-top:8px; }
+.content-body h2 { margin-top:36px; }
+hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
+.service-area { background:var(--bg2); border-top:1px solid var(--border); padding:18px 24px; margin:32px 0 0; font-family:Arial,sans-serif; font-size:13px; color:var(--muted); line-height:1.7; display:flex; align-items:flex-start; gap:8px; }
+.service-area svg { flex-shrink:0; margin-top:2px; color:var(--muted); }
+.service-area strong { color:var(--text); }
+footer { background:var(--white); border-top:1px solid var(--border); padding:28px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+.footer-links a { font-family:Arial,sans-serif; font-size:13px; color:var(--muted); }
+.footer-links a:hover { color:var(--black); opacity:1; }
+.footer-note { font-family:Arial,sans-serif; font-size:12px; color:#C0C0C0; }
+@media (max-width:700px) { nav { padding:0 20px; } article { padding:24px 20px 60px; } footer { padding:24px 20px; } }</style>
+</head>
+<body>
+<nav>
+  <a href="/">{{nav_logo_html}}</a>
+  <div class="nav-links">
+    <a href="/">Startseite</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="/">{{platform_title}}</a>
+  <span>/</span>
+  <span style="color:var(--text);">Impressum</span>
+</div>
+<article>
+  <div class="hero-eyebrow">Impressum</div>
+  <h1>{{content_headline}}</h1>
+  <div class="content-body">{{{content_html}}}</div>
+  {{service_area_block}}
+</article>
+<footer>
+  <a href="/">{{footer_logo_html}}</a>
+  <div class="footer-links">
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+  </div>
+  <div class="footer-note">© {{year}} {{platform_title}} — Ein Projekt von Lokale Marktmacht</div>
+</footer>
+</body>
+</html>
