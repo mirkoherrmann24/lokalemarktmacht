@@ -1,2 +1,8 @@
+.git
 _worker.js
 wrangler.toml
+.assetsignore
+node_modules
+README.md
+LICENSE
+.gitignore
