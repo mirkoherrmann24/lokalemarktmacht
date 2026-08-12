@@ -8,13 +8,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #0B1F35;
       --deep:   #071628;
+      --navy:   #0B1F35;
       --gold:   #C8A84B;
       --gold2:  #E2C46E;
       --white:  #F5F0E8;
       --muted:  #8A9BAD;
-      --card:   rgba(255,255,255,0.04);
       --border: rgba(200,168,75,0.18);
     }
 
@@ -28,621 +27,526 @@
       overflow-x: hidden;
     }
 
+    /* Grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 48px;
-      background: linear-gradient(to bottom, rgba(7,22,40,0.95), transparent);
+      padding: 20px 48px;
+      background: rgba(7,22,40,0.96);
+      border-bottom: 1px solid rgba(200,168,75,0.08);
+      backdrop-filter: blur(8px);
     }
-
     .logo {
-      font-family: 'Arial Narrow', Arial, sans-serif;
-      font-weight: 700;
-      font-size: 15px;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 14px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
     }
-    .logo span { color: var(--white); opacity: 0.5; margin: 0 6px; }
-
-    .nav-login {
+    .logo span { color: rgba(245,240,232,0.3); margin: 0 8px; font-weight: 400; }
+    .nav-cta {
       font-family: Arial, sans-serif;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      border: 1px solid rgba(138,155,173,0.3);
-      padding: 9px 20px;
-      border-radius: 2px;
-      transition: all 0.25s;
+      color: var(--deep);
+      background: var(--gold);
+      padding: 13px 28px;
+      border: none;
       cursor: pointer;
-      background: transparent;
+      transition: background 0.2s;
+      text-decoration: none;
     }
-    .nav-login:hover {
-      color: var(--gold);
-      border-color: var(--gold);
-    }
+    .nav-cta:hover { background: var(--gold2); }
 
     /* ─── HERO ─── */
     .hero {
+      position: relative;
+      z-index: 1;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 32px 80px;
-      position: relative;
+      padding: 140px 48px 100px;
     }
-
-    /* Subtle grid background */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
+    .hero-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
     }
-
-    /* Radial glow */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(ellipse, rgba(200,168,75,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
+    .hero-preline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      letter-spacing: 4px;
+      font-size: 12px;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 28px;
-      position: relative;
-      z-index: 1;
+      opacity: 0.9;
     }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '—';
-      margin: 0 12px;
+    .hero-preline::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
       opacity: 0.5;
     }
 
     h1 {
-      font-size: clamp(32px, 5vw, 60px);
+      font-size: clamp(34px, 5.5vw, 68px);
       font-weight: 400;
-      line-height: 1.15;
-      color: var(--white);
-      max-width: 820px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
+      line-height: 1.12;
       letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 20px;
     }
     h1 em {
       font-style: italic;
       color: var(--gold);
     }
 
-    .hero-sub {
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 620px;
-      line-height: 1.8;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 1;
+    .hero-question {
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 400;
+      line-height: 1.45;
+      color: rgba(245,240,232,0.55);
+      font-style: italic;
+      margin-bottom: 36px;
+      padding-left: 20px;
+      border-left: 2px solid rgba(200,168,75,0.35);
     }
 
-    /* ─── PILLARS ─── */
-    .pillar-grid {
+    .hero-sub {
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 660px;
+      margin-bottom: 52px;
+    }
+    .hero-sub strong {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--deep);
+      background: var(--gold);
+      padding: 18px 40px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+    .btn-note {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section { position: relative; z-index: 1; }
+
+    /* ─── EXPERT SECTION ─── */
+    .expert-section {
+      padding: 100px 48px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .expert-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+
+    .three-cols {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: rgba(200,168,75,0.12);
-      border: 1px solid rgba(200,168,75,0.12);
+      background: rgba(200,168,75,0.1);
     }
-    .pillar-box {
+    .col {
       background: var(--deep);
-      padding: 36px 32px;
+      padding: 44px 36px;
+      position: relative;
     }
-    .pillar-label {
+    .col-number {
       font-family: Arial, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
+      color: rgba(200,168,75,0.35);
+      margin-bottom: 24px;
+      font-weight: 700;
     }
-    .pillar-text {
+    .col h3 {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+    .col h3 em { font-style: italic; color: var(--gold); }
+    .col p {
       font-family: Arial, sans-serif;
       font-size: 15px;
       color: var(--muted);
       line-height: 1.75;
     }
 
-    @media (max-width: 700px) {
-      .pillar-grid { grid-template-columns: 1fr; }
+    /* ─── EXCLUSIVITY STRIP ─── */
+    .excl-section {
+      padding: 80px 48px;
+      background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, transparent 60%);
+      border-top: 1px solid rgba(200,168,75,0.12);
+      border-bottom: 1px solid rgba(200,168,75,0.12);
     }
-
-    /* ─── DIVIDER LINE ─── */
-    .divider {
-      width: 1px;
-      height: 56px;
-      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-      margin: 0 auto 56px;
-      position: relative;
-      z-index: 1;
+    .excl-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
     }
-
-    /* ─── CTA PAIR ─── */
-    .cta-pair {
+    .excl-text h2 {
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .excl-text h2 em { font-style: italic; color: var(--gold); }
+    .excl-text p {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+    .excl-badge {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .excl-badge-ring {
+      width: 148px;
+      height: 148px;
+      border: 1px solid rgba(200,168,75,0.3);
+      border-radius: 50%;
       display: flex;
-      gap: 20px;
-      align-items: stretch;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
+      gap: 4px;
       position: relative;
-      z-index: 1;
     }
-
-    .cta-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 36px 40px;
-      min-width: 360px;
-      flex: 1;
-      max-width: 440px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-card::before {
+    .excl-badge-ring::before {
       content: '';
       position: absolute;
-      bottom: 0; left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s;
+      inset: 6px;
+      border: 1px solid rgba(200,168,75,0.12);
+      border-radius: 50%;
     }
-    .cta-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(200,168,75,0.4); }
-    .cta-card:hover::before { transform: scaleX(1); }
+    .excl-n { font-family: Arial, sans-serif; font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .excl-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,168,75,0.6); }
 
-    .cta-label {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
+    /* ─── OMNI STRIP ─── */
+    .omni-section {
+      padding: 100px 48px;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
-    .cta-title {
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .cta-desc {
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-      transition: gap 0.2s;
-    }
-    .cta-btn:hover { gap: 12px; }
-    .cta-btn .arrow { color: var(--gold); font-size: 16px; }
-
-    /* Primary card highlight */
-    .cta-card.primary {
-      background: rgba(200,168,75,0.06);
-      border-color: rgba(200,168,75,0.35);
-    }
-    .cta-card.primary:hover { background: rgba(200,168,75,0.1); }
-
-    /* ─── TENSION STRIP ─── */
-    .tension {
-      text-align: center;
-      padding: 80px 32px;
-      position: relative;
-    }
-    .tension-inner {
-      max-width: 680px;
+    .omni-inner {
+      max-width: 960px;
       margin: 0 auto;
     }
-    .tension-quote {
-      font-size: clamp(22px, 3.5vw, 36px);
+    .omni-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 52px;
+    }
+    .omni-text h2 {
+      font-size: clamp(24px, 3.2vw, 36px);
       font-weight: 400;
+      line-height: 1.25;
       color: var(--white);
-      line-height: 1.5;
-      margin-bottom: 32px;
+      margin-bottom: 20px;
     }
-    .tension-quote strong {
-      font-weight: 400;
-      color: var(--gold);
-      border-bottom: 1px solid rgba(200,168,75,0.4);
+    .omni-text h2 em { font-style: italic; color: var(--gold); }
+    .omni-text p {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
     }
-    .tension-note {
+    .omni-items { display: flex; flex-direction: column; gap: 16px; }
+    .omni-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .omni-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+      opacity: 0.7;
+    }
+    .omni-item-text {
       font-family: Arial, sans-serif;
       font-size: 15px;
       color: var(--muted);
-      letter-spacing: 0.5px;
+      line-height: 1.65;
+    }
+    .omni-item-text strong { color: var(--white); font-weight: 400; }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      padding: 100px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .final-cta h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--gold); }
+    .final-cta p {
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 44px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
       line-height: 1.7;
     }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.05);
       padding: 28px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+      z-index: 1;
       flex-wrap: wrap;
       gap: 12px;
     }
     .footer-logo {
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      letter-spacing: 3px;
+      font-size: 12px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--muted);
-    }
-    .footer-links {
-      display: flex;
-      gap: 24px;
+      color: rgba(200,168,75,0.25);
+      font-weight: 700;
     }
     .footer-links a {
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      color: rgba(138,155,173,0.5);
+      font-size: 12px;
+      color: rgba(138,155,173,0.3);
       text-decoration: none;
-      letter-spacing: 1px;
+      margin-left: 20px;
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--muted); }
 
-    /* ─── MODALS ─── */
-    .overlay {
+    /* ─── MODAL ─── */
+    .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(7,22,40,0.92);
-      backdrop-filter: blur(6px);
-      z-index: 200;
+      background: rgba(4,13,24,0.92);
+      z-index: 500;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
-    .overlay.active { display: flex; }
-
+    .modal-overlay.open { display: flex; }
     .modal {
-      background: #0F2238;
+      background: #0D1F33;
       border: 1px solid var(--border);
+      max-width: 520px;
       width: 100%;
-      max-width: 560px;
-      padding: 48px 52px;
+      padding: 52px 48px;
       position: relative;
     }
-
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
     .modal-close {
       position: absolute;
       top: 20px; right: 24px;
-      background: transparent;
+      background: none;
       border: none;
       color: var(--muted);
-      font-size: 22px;
+      font-size: 24px;
       cursor: pointer;
       line-height: 1;
+      padding: 4px;
       transition: color 0.2s;
     }
     .modal-close:hover { color: var(--white); }
-
-    .modal-label {
+    .modal-eyebrow {
       font-family: Arial, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 16px;
     }
     .modal h2 {
-      font-size: 26px;
+      font-size: clamp(22px, 3.5vw, 30px);
       font-weight: 400;
+      line-height: 1.25;
       color: var(--white);
       margin-bottom: 10px;
-      line-height: 1.3;
     }
     .modal-sub {
       font-family: Arial, sans-serif;
       font-size: 15px;
       color: var(--muted);
-      line-height: 1.6;
       margin-bottom: 32px;
+      line-height: 1.65;
     }
-
-    .form-group { margin-bottom: 18px; }
-    .form-group label {
+    .modal-field {
+      margin-bottom: 16px;
+    }
+    .modal-field label {
       display: block;
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      letter-spacing: 1.5px;
+      font-size: 11px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 8px;
     }
-    .form-group input,
-    .form-group select {
+    .modal-field input {
       width: 100%;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.1);
       color: var(--white);
       font-family: Arial, sans-serif;
-      font-size: 17px;
-      padding: 12px 16px;
+      font-size: 16px;
+      padding: 14px 18px;
       outline: none;
       transition: border-color 0.2s;
-      appearance: none;
       border-radius: 0;
     }
-    .form-group input::placeholder { color: rgba(138,155,173,0.4); }
-    .form-group input:focus,
-    .form-group select:focus { border-color: rgba(200,168,75,0.5); }
-    .form-group select { cursor: pointer; }
-    .form-group select option { background: #0F2238; }
-
-    .submit-btn {
+    .modal-field input:focus { border-color: rgba(200,168,75,0.5); }
+    .modal-field input::placeholder { color: rgba(138,155,173,0.35); }
+    .modal-field select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      cursor: pointer;
+      appearance: none;
+    }
+    .modal-field select:focus { border-color: rgba(200,168,75,0.5); }
+    .modal-field select option { background: #0D1F33; color: var(--white); }
+    .modal-btn {
       width: 100%;
       background: var(--gold);
-      color: #071628;
+      color: var(--deep);
       font-family: Arial, sans-serif;
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 16px;
+      padding: 18px;
       border: none;
       cursor: pointer;
       transition: background 0.2s;
       margin-top: 8px;
     }
-    .submit-btn:hover { background: var(--gold2); }
-
-    .form-note {
+    .modal-btn:hover { background: var(--gold2); }
+    .modal-note {
       font-family: Arial, sans-serif;
       font-size: 13px;
-      color: rgba(138,155,173,0.45);
+      color: var(--muted);
+      opacity: 0.5;
       text-align: center;
       margin-top: 16px;
-      line-height: 1.5;
     }
 
-    /* Login error */
-    .login-error {
-      display: none;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: #E07070;
-      margin-top: 10px;
-    }
-
-    /* Success state */
-    .success-state {
-      display: none;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .success-icon {
-      font-size: 42px;
-      margin-bottom: 20px;
-    }
-    .success-state h3 {
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .success-state p {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ─── RELEVANZ SECTION ─── */
-    .relevanz {
-      padding: 100px 32px;
-      position: relative;
-    }
-    .relevanz-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .section-eyebrow {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .relevanz-intro {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .relevanz-intro h2 {
-      font-size: clamp(26px, 4vw, 42px);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.35;
-      margin-bottom: 20px;
-      letter-spacing: -0.3px;
-    }
-    .relevanz-intro p {
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.75;
-    }
-
-    /* Tab nav */
-    .tab-nav {
-      display: flex;
-      gap: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 48px;
-    }
-    .tab-btn {
-      background: transparent;
-      border: none;
-      padding: 16px 28px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      position: relative;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .tab-btn::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.25s;
-    }
-    .tab-btn:hover { color: var(--white); }
-    .tab-btn.active { color: var(--gold); }
-    .tab-btn.active::after { transform: scaleX(1); }
-
-    /* Tab panels */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-
-    .panel-left {}
-    .panel-headline {
-      font-size: clamp(18px, 2.5vw, 24px);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.5;
-      margin-bottom: 36px;
-      font-style: italic;
-    }
-    .panel-headline em {
-      font-style: normal;
-      color: var(--gold);
-    }
-
-    .topics-label {
-      font-family: Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-    .topic-item {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 16px;
-      align-items: flex-start;
-    }
-    .topic-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 8px;
-      flex-shrink: 0;
-      opacity: 0.7;
-    }
-    .topic-item strong {
-      display: block;
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 2px;
-    }
-    .topic-item span {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .panel-right {}
-    .relevanz-box {
-      background: rgba(200,168,75,0.05);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      padding: 32px 28px;
-    }
-    .relevanz-box-label {
-      font-family: Arial, sans-serif;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-    .relevanz-box p {
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: var(--white);
-      line-height: 1.8;
-      opacity: 0.85;
-    }
-
-    @media (max-width: 720px) {
-      .tab-panel.active { grid-template-columns: 1fr; gap: 32px; }
-      .tab-btn { padding: 14px 16px; font-size: 11px; letter-spacing: 1px; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 20px 24px; }
-      .cta-card { width: 100%; max-width: 320px; }
-      .modal { padding: 36px 28px; }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .expert-section, .excl-section, .omni-section, .final-cta { padding: 72px 24px; }
+      .three-cols { grid-template-columns: 1fr; }
+      .excl-inner { grid-template-columns: 1fr; gap: 36px; }
+      .excl-badge { display: none; }
+      .omni-grid { grid-template-columns: 1fr; gap: 48px; }
+      .modal { padding: 40px 28px; }
       footer { padding: 24px; }
     }
   </style>
@@ -653,246 +557,227 @@
 <!-- NAV -->
 <nav>
   <div class="logo">Lokale<span>·</span>Marktmacht</div>
-  <button class="nav-login" onclick="openCheck()">Jetzt Verfügbarkeit checken</button>
+  <button class="nav-cta" onclick="openModal()">Jetzt Verfügbarkeit checken</button>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-eyebrow">Lokale Marktmacht</div>
-  <h1>Wenn jemand in Ihrer Region<br>nach Ihren Themen sucht –<br><em>wer wird dann gefunden?</em></h1>
-  <p class="hero-sub">
-    Wir machen Sie zum nachgefragten Experten Ihrer Region – mit Veröffentlichungen,
-    die Relevanz beweisen und Sichtbarkeit schaffen. Mit maximaler Transparenz.
-    Ganz ohne Marketing-Voodoo. Das Ergebnis: Echte Anfragen für echte Projekte von echten Menschen.
-  </p>
+  <div class="hero-inner">
+    <div class="hero-preline">Lokale Marktmacht</div>
 
-  <p style="font-family: Arial, sans-serif; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 48px; position: relative; z-index: 1;">
-    Überzeugen Sie sich selbst.
-  </p>
+    <h1>Vom Dienstleister<br>zum nachgefragten<br><em>Experten.</em></h1>
 
-  <div class="divider"></div>
+    <p class="hero-question">
+      „Wenn jemand in Ihrer Stadt nach Ihrer Expertise sucht –<br>werden Sie dort als <em>Experte</em> wahrgenommen?"
+    </p>
 
-  <div class="cta-pair">
-    <!-- CTA: Verfügbarkeit -->
-    <div class="cta-card primary" onclick="openCheck()">
-      <div class="cta-label">Noch nicht in Kontakt?</div>
-      <div class="cta-title">Verfügbarkeit prüfen</div>
-      <div class="cta-desc">
-        Ist Ihre Region und Branche noch frei? Finden Sie es jetzt heraus.
-      </div>
-      <span class="cta-btn">Jetzt checken <span class="arrow">→</span></span>
+    <p class="hero-sub">
+      Wir schaffen lokale Omnipräsenz für spezialisierte Fachleute –
+      durch redaktionelle Expertenbeiträge, die bei Google <strong>und in KI-Suchen</strong> sichtbar sind.
+      Höchste Qualitätsansprüche, redaktionelle Expertise und echte Kompetenz in der Leadgenerierung –
+      kombiniert in einem System, das für Sie arbeitet.
+    </p>
+
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="openModal()">Verfügbarkeit prüfen →</button>
+      <span class="btn-note">Kostenlos &amp; unverbindlich</span>
     </div>
   </div>
 </section>
 
-<!-- RELEVANZ SECTION -->
-<section class="relevanz">
-  <div class="relevanz-inner">
-    <div class="section-eyebrow">Relevanz für Google und Menschen</div>
-    <div class="relevanz-intro">
-      <h2>Keine tausend schlechten Kopien.<br>Inhalt, der wirklich zählt.</h2>
+<!-- ══════════════════════════════════════
+     DREI SÄULEN
+══════════════════════════════════════ -->
+<section class="expert-section">
+  <div class="expert-inner">
+    <div class="section-eyebrow">Wie es funktioniert</div>
+    <div class="three-cols">
+
+      <div class="col">
+        <div class="col-number">01</div>
+        <h3>Relevanz</h3>
+        <p>
+          Wer Sie online nicht als Experten wahrnimmt, fragt woanders an.
+          Wir positionieren Sie als die erste Adresse für Ihre Spezialisierung –
+          mit redaktionellen Beiträgen, die Kompetenz beweisen statt nur behaupten.
+        </p>
+      </div>
+
+      <div class="col">
+        <div class="col-number">02</div>
+        <h3>Lokale <em>Omnipräsenz</em></h3>
+        <p>
+          Ihr Name und Ihre Expertise erscheinen dort, wo Ihre Zielkunden suchen –
+          bei Google, in Google News und in den Antworten moderner KI-Systeme.
+          Sichtbar. Relevant. Lokal verankert.
+        </p>
+      </div>
+
+      <div class="col">
+        <div class="col-number">03</div>
+        <h3>Qualifizierte <em>Leads</em></h3>
+        <p>
+          Kein Marketing-Voodoo, keine leeren Versprechen.
+          Wir messen Ergebnisse: qualifizierte Anfragen von Menschen,
+          die Sie bereits als Experten kennen – bevor Sie das erste Gespräch führen.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXKLUSIVITÄT
+══════════════════════════════════════ -->
+<section class="excl-section">
+  <div class="excl-inner">
+    <div class="excl-text">
+      <h2>Wir suchen keine Kunden.<br>Wir suchen <em>Partner.</em></h2>
       <p>
-        Wir arbeiten ausschließlich mit Experten in Märkten, in denen Sichtbarkeit
-        echte wirtschaftliche Konsequenzen hat – für den Experten und für seine Mandanten.
+        Deshalb arbeiten wir in jeder Stadt, in jeder Branche,
+        mit genau einem einzigen Partner zusammen. Nicht weil wir knapp sind –
+        sondern weil echte Marktführerschaft keine Kompromisse verträgt.
+        Wer der nachgefragte Experte in seiner Region sein will,
+        darf das nicht mit dem Wettbewerber teilen.
+      </p>
+      <p style="margin-top: 16px; color: rgba(200,168,75,0.75);">
+        Ihr Markt könnte schon morgen vergeben sein.
       </p>
     </div>
-
-    <div class="pillar-grid">
-      <div class="pillar-box">
-        <div class="pillar-label">Relevanz</div>
-        <p class="pillar-text">
-          Wir wählen Märkte aus, in denen Expertenstatus nicht nur imagebildend wirkt,
-          sondern direkt in Umsatz und Mandatsqualität übersetzt.
-        </p>
-      </div>
-      <div class="pillar-box">
-        <div class="pillar-label">Redaktionelle Tiefe</div>
-        <p class="pillar-text">
-          Kein generierter Masseninhalt. Jeder Beitrag ist thematisch präzise,
-          lokal kontextualisiert und auf die Anforderungen von Google und
-          KI-Suchen ausgerichtet.
-        </p>
-      </div>
-      <div class="pillar-box">
-        <div class="pillar-label">Exklusivität</div>
-        <p class="pillar-text">
-          Pro Branche und Region arbeiten wir mit genau einem Partner.
-          Wer dabei ist, schließt damit den Markt für alle anderen.
-        </p>
+    <div class="excl-badge">
+      <div class="excl-badge-ring">
+        <span class="excl-n">1</span>
+        <span class="excl-label">Pro Stadt</span>
+        <span class="excl-label">Pro Branche</span>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- OMNIPRÄSENZ STRIP -->
-<section class="tension" style="padding-bottom: 80px;">
-  <div class="tension-inner" style="max-width: 680px;">
-    <div class="section-eyebrow" style="margin-bottom: 28px;">Wettbewerbsvorteil Lokale Omnipräsenz</div>
-    <p class="tension-quote" style="font-size: clamp(20px, 3vw, 30px);">
-      Wer in Ihrer Region nach Ihren Themen sucht,
-      begegnet Ihnen. Nicht einmal. Immer wieder.
-    </p>
-    <p class="tension-note" style="max-width: 480px; margin: 0 auto;">
-      Was uns unterscheidet: Qualität ist unsere Leidenschaft.
-      Qualifizierte Anfragen Ihr Ergebnis.
-    </p>
+<!-- ══════════════════════════════════════
+     OMNIPRÄSENZ
+══════════════════════════════════════ -->
+<section class="omni-section">
+  <div class="omni-inner">
+    <div class="section-eyebrow">Lokale Omnipräsenz</div>
+    <div class="omni-grid">
+      <div class="omni-text">
+        <h2>Sichtbar dort, wo Ihre Kunden Sie <em>suchen.</em></h2>
+        <p>
+          Wir schaffen ein Netz redaktioneller Expertenbeiträge –
+          mit maximaler Transparenz, ohne Marketing-Voodoo.
+          Jeder Beitrag ist ein Beweis Ihrer Kompetenz,
+          indexiert von Google und als verlässliche Quelle von KI-Systemen genutzt.
+        </p>
+      </div>
+      <div class="omni-items">
+        <div class="omni-item">
+          <div class="omni-dot"></div>
+          <div class="omni-item-text"><strong>Google &amp; Google News</strong> – redaktionelle Sichtbarkeit mit journalistischer Qualität</div>
+        </div>
+        <div class="omni-item">
+          <div class="omni-dot"></div>
+          <div class="omni-item-text"><strong>KI-Suchen</strong> – Ihre Expertise als Antwort, wenn ChatGPT, Perplexity &amp; Co. gefragt werden</div>
+        </div>
+        <div class="omni-item">
+          <div class="omni-dot"></div>
+          <div class="omni-item-text"><strong>Local Authority Pages</strong> – Profilseiten, die Vertrauen aufbauen bevor das erste Gespräch stattfindet</div>
+        </div>
+        <div class="omni-item">
+          <div class="omni-dot"></div>
+          <div class="omni-item-text"><strong>Pay per qualified Lead</strong> – Sie zahlen für Ergebnisse, nicht für Reichweite</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════ -->
+<section class="final-cta">
+  <h2>Ist Ihr Markt<br>noch <em>frei?</em></h2>
+  <p>Prüfen Sie jetzt, ob Ihre Stadt und Ihre Branche noch verfügbar sind. Kostenlos und unverbindlich.</p>
+  <button class="btn-primary" onclick="openModal()">Verfügbarkeit prüfen →</button>
+</section>
+
+<!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-logo">lokalemarktmacht.de</div>
+  <div class="footer-logo">Lokale · Marktmacht</div>
   <div class="footer-links">
-    <a href="/impressum">Impressum</a>
-    <a href="/datenschutz">Datenschutz</a>
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
   </div>
 </footer>
 
-
-<!-- ═══════════════════════════════════════ -->
-<!-- MODAL 1: LOGIN                          -->
-<!-- ═══════════════════════════════════════ -->
-<div class="overlay" id="loginOverlay" onclick="closeOnBg(event, 'loginOverlay')">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('loginOverlay')">×</button>
-    <div class="modal-label">Geschützter Bereich</div>
-    <h2>Willkommen zurück.</h2>
-    <p class="modal-sub">
-      Geben Sie Ihr persönliches Zugangswort ein, das Sie erhalten haben.
-    </p>
-
-    <div id="loginForm">
-      <div class="form-group">
-        <label>Ihr Zugangswort</label>
-        <input type="password" id="passwordInput" placeholder="············"
-               onkeydown="if(event.key==='Enter') doLogin()">
-      </div>
-      <p class="login-error" id="loginError">
-        Dieses Zugangswort ist nicht gültig.
-      </p>
-      <button class="submit-btn" onclick="doLogin()">Zugang öffnen →</button>
-      <p class="form-note">
-        Kein Zugangswort erhalten?<br>
-        Schreiben Sie uns: <a href="mailto:office@herrmann.marketing"
-          style="color: var(--gold); text-decoration: none;">office@herrmann.marketing</a>
-      </p>
+<!-- ══════════════════════════════════════
+     MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-eyebrow">Verfügbarkeit prüfen</div>
+    <h2>Ist Ihr Markt noch frei?</h2>
+    <p class="modal-sub">Wir prüfen, ob Ihre Stadt und Ihre Branche noch verfügbar sind – und melden uns persönlich.</p>
+    <div class="modal-field">
+      <label>Ihre Branche</label>
+      <select id="branche">
+        <option value="">Bitte auswählen</option>
+        <option>Holzbau / Zimmerer</option>
+        <option>Dachdeckerei</option>
+        <option>Steuerberatung</option>
+        <option>Immobilienmakler</option>
+        <option>Rechtsanwalt</option>
+        <option>Architekt</option>
+        <option>Unternehmensberatung</option>
+        <option>Andere Branche</option>
+      </select>
     </div>
+    <div class="modal-field">
+      <label>Ihre Stadt / Region</label>
+      <input type="text" id="stadt" placeholder="z. B. Frankfurt am Main">
+    </div>
+    <div class="modal-field">
+      <label>Ihre E-Mail</label>
+      <input type="email" id="email" placeholder="ihre@email.de">
+    </div>
+    <button class="modal-btn" onclick="submitModal()">Jetzt prüfen →</button>
+    <p class="modal-note">Kostenlos &amp; unverbindlich · Kein Spam</p>
   </div>
 </div>
-
-
-<!-- ═══════════════════════════════════════ -->
-<!-- MODAL 2: VERFÜGBARKEIT                  -->
-<!-- ═══════════════════════════════════════ -->
-<div class="overlay" id="checkOverlay" onclick="closeOnBg(event, 'checkOverlay')">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('checkOverlay')">×</button>
-
-    <div id="checkForm">
-      <div class="modal-label">Verfügbarkeit prüfen</div>
-      <h2>Ist Ihr Markt noch frei?</h2>
-      <p class="modal-sub">
-        Wir prüfen innerhalb von 24 Stunden, ob Ihre Region und Ihre Branche noch verfügbar sind.
-      </p>
-
-      <div class="form-group">
-        <label>Vorname &amp; Name</label>
-        <input type="text" id="cName" placeholder="Max Mustermann">
-      </div>
-      <div class="form-group">
-        <label>E-Mail-Adresse</label>
-        <input type="email" id="cEmail" placeholder="max@kanzlei-mustermann.de">
-      </div>
-      <div class="form-group">
-        <label>Ihre Branche</label>
-        <input type="text" id="cBranche" placeholder="z. B. Steuerberatung">
-      </div>
-      <div class="form-group">
-        <label>Ihr Hauptstandort (Stadt)</label>
-        <input type="text" id="cStadt" placeholder="z. B. Nürnberg">
-      </div>
-
-      <button class="submit-btn" onclick="doCheck()">Verfügbarkeit anfragen →</button>
-      <p class="form-note">
-        Keine Verpflichtung. Kein Newsletter.<br>
-        Wir melden uns nur, wenn Ihr Markt noch offen ist.
-      </p>
-    </div>
-
-    <div class="success-state" id="checkSuccess">
-      <div class="success-icon">✦</div>
-      <h3>Anfrage eingegangen.</h3>
-      <p>
-        Wir prüfen die Verfügbarkeit für Ihre Region und melden uns
-        innerhalb von 24 Stunden – persönlich und direkt.
-      </p>
-    </div>
-  </div>
-</div>
-
 
 <script>
-  function openLogin() {
-    document.getElementById('loginOverlay').classList.add('active');
-    document.getElementById('passwordInput').focus();
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
-  function openCheck() {
-    document.getElementById('checkOverlay').classList.add('active');
-    document.getElementById('cName').focus();
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
   }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
+  function closeOnOverlay(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
   }
-  function closeOnBg(e, id) {
-    if (e.target === document.getElementById(id)) closeModal(id);
-  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeModal('loginOverlay');
-      closeModal('checkOverlay');
-    }
-  });
-
-  function doLogin() {
-    const pw = document.getElementById('passwordInput').value.trim();
-    const err = document.getElementById('loginError');
-    // Placeholder: define valid passwords here or connect to backend
-    const validPasswords = ['LMM2026', 'demo'];
-    if (validPasswords.includes(pw)) {
-      // Redirect to protected area
-      alert('Weiterleitung zum geschützten Bereich …\n(URL hier hinterlegen)');
-    } else {
-      err.style.display = 'block';
-      document.getElementById('passwordInput').select();
-    }
-  }
-
-  function switchTab(id, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('panel-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  function doCheck() {
-    const name   = document.getElementById('cName').value.trim();
-    const email  = document.getElementById('cEmail').value.trim();
-    const branch = document.getElementById('cBranche').value;
-    const stadt  = document.getElementById('cStadt').value.trim();
-
-    if (!name || !email || !branch || !stadt) {
-      alert('Bitte füllen Sie alle Felder aus.');
+  function submitModal() {
+    const branche = document.getElementById('branche').value;
+    const stadt   = document.getElementById('stadt').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    if (!branche || !stadt || !email) {
+      alert('Bitte alle Felder ausfüllen.');
       return;
     }
-
-    // Here you'd POST to your backend / Zapier / Make / Mailchimp etc.
-    // For now: show success state
-    document.getElementById('checkForm').style.display = 'none';
-    document.getElementById('checkSuccess').style.display = 'block';
+    const subject = encodeURIComponent(`Verfügbarkeitsanfrage: ${branche} in ${stadt}`);
+    const body    = encodeURIComponent(`Branche: ${branche}\nStadt: ${stadt}\nE-Mail: ${email}`);
+    window.location.href = `mailto:office@herrmann.marketing?subject=${subject}&body=${body}`;
+    closeModal();
   }
 </script>
+
 <script>
 (function(){
   var origDoCheck = window.doCheck;
