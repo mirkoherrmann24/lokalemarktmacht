@@ -708,8 +708,8 @@
 <footer>
   <div class="footer-logo">Lokale · Marktmacht</div>
   <div class="footer-links">
-    <a href="#">Impressum</a>
-    <a href="#">Datenschutz</a>
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
   </div>
 </footer>
 
@@ -780,26 +780,29 @@
 
 <script>
 (function(){
-  var origDoCheck = window.doCheck;
-  window.doCheck = async function(){
-    var name = document.getElementById('cName').value.trim();
-    var email = document.getElementById('cEmail').value.trim();
-    var branch = document.getElementById('cBranche').value.trim();
-    var stadt = document.getElementById('cStadt').value.trim();
-    if (!name || !email || !branch || !stadt) { alert('Bitte füllen Sie alle Felder aus.'); return; }
-    var btn = document.querySelector('#checkForm .submit-btn');
+  window.submitModal = async function(){
+    var branche = document.getElementById('branche').value;
+    var stadt = document.getElementById('stadt').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!branche || !stadt || !email) { alert('Bitte füllen Sie alle Felder aus.'); return; }
+    var btn = document.querySelector('.modal-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Prüfe Verfügbarkeit…'; }
     try {
       var resp = await fetch('https://lokale-marktmacht-authority.base44.app/api/functions/receivePublicLead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, industry: branch, location: stadt, platform_domain: 'lokalemarktmacht.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branch + ', Stadt: ' + stadt })
+        body: JSON.stringify({ name: email, email: email, industry: branche, location: stadt, platform_domain: 'lokalemarktmacht.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branche + ', Stadt: ' + stadt })
       });
       if (!resp.ok) throw new Error('Server-Fehler');
-      document.getElementById('checkForm').style.display = 'none';
-      document.getElementById('checkSuccess').style.display = 'block';
+      var modal = document.getElementById('modal');
+      if (modal) {
+        modal.innerHTML = '<div class="modal-eyebrow">Vielen Dank!</div><h2>Wir prüfen Ihre Verfügbarkeit</h2><p class="modal-sub">Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen unter ' + email + '.</p><button class="modal-btn" onclick="closeModal()">Schließen</button>';
+      } else {
+        alert('Vielen Dank! Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.');
+        closeModal();
+      }
     } catch(e) {
-      if (btn) { btn.disabled = false; btn.textContent = 'Verfügbarkeit anfragen →'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Jetzt prüfen →'; }
       alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
     }
   };
