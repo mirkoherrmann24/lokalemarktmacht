@@ -48,6 +48,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
       padding: 20px 48px;
       background: rgba(7,22,40,0.96);
       border-bottom: 1px solid rgba(200,168,75,0.08);
@@ -66,15 +67,17 @@
       font-family: Arial, sans-serif;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--deep);
       background: var(--gold);
-      padding: 11px 18px;
+      padding: 10px 14px;
       border: none;
       cursor: pointer;
       transition: background 0.2s;
       text-decoration: none;
+      white-space: nowrap;
+      margin-left: auto;
     }
     .nav-cta:hover { background: var(--gold2); }
 
@@ -540,10 +543,10 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
-      nav { padding: 16px 14px; }
+      nav { padding: 16px 14px; gap: 12px; }
       nav .logo span { margin: 0 4px; }
       .cta-prefix { display: none; }
-      .nav-cta { padding: 11px 16px; }
+      .nav-cta { padding: 9px 12px; font-size: 11px; letter-spacing: 0.5px; }
       .hero { padding: 120px 18px 80px; }
       .expert-section, .excl-section, .omni-section, .final-cta { padding: 72px 18px; }
       .three-cols { grid-template-columns: 1fr; }
