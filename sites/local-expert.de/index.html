@@ -540,15 +540,18 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
-      nav { padding: 16px 24px; }
-      .hero { padding: 120px 24px 80px; }
-      .expert-section, .excl-section, .omni-section, .final-cta { padding: 72px 24px; }
+      nav { padding: 16px 14px; }
+      nav .logo span { margin: 0 4px; }
+      .cta-prefix { display: none; }
+      .nav-cta { padding: 11px 16px; }
+      .hero { padding: 120px 18px 80px; }
+      .expert-section, .excl-section, .omni-section, .final-cta { padding: 72px 18px; }
       .three-cols { grid-template-columns: 1fr; }
       .excl-inner { grid-template-columns: 1fr; gap: 36px; }
       .excl-badge { display: none; }
       .omni-grid { grid-template-columns: 1fr; gap: 48px; }
-      .modal { padding: 40px 28px; }
-      footer { padding: 24px 20px; }
+      .modal { padding: 40px 22px; }
+      footer { padding: 24px 14px; }
     }
   </style>
 <meta name="description" content="Local Expert macht Dienstleister zu Experten - transparent und profitabel. Sichern Sie sich Ihren Status - exklusiv in Ihrer Region">
@@ -558,7 +561,7 @@
 <!-- NAV -->
 <nav>
   <div class="logo">Local<span>·</span>Expert</div>
-  <button class="nav-cta" onclick="openModal()">Jetzt Verfügbarkeit checken</button>
+  <button class="nav-cta" onclick="openModal()"><span class="cta-prefix">Jetzt </span>Verfügbarkeit checken</button>
 </nav>
 
 <!-- ══════════════════════════════════════
@@ -707,7 +710,7 @@
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-logo">Lokale · Marktmacht</div>
+  <div class="footer-logo">Local · Expert</div>
   <div class="footer-links">
     <a href="/impressum/">Impressum</a>
     <a href="/datenschutz/">Datenschutz</a>
