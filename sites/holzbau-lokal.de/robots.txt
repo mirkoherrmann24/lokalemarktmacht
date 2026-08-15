@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Explizite Freigabe für KI-Crawler (LLM-Training & Such-LLMs)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.holzbau-lokal.de/sitemap.xml
