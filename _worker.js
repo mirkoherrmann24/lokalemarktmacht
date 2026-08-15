@@ -2,10 +2,17 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const hostname = url.hostname.replace(/^www\./, '');
+    const rawHost = url.hostname;
+    const hostname = rawHost.replace(/^www\./, '');
 
-    // Rebranding: alte Domain lokalemarktmacht.de dauerhaft auf local-expert.de weiterleiten
+    // Rebranding: alte Domain lokalemarktmacht.de dauerhaft auf www.local-expert.de weiterleiten
     if (hostname === 'lokalemarktmacht.de') {
+      const newUrl = 'https://www.local-expert.de' + url.pathname + url.search;
+      return Response.redirect(newUrl, 301);
+    }
+
+    // Apex local-expert.de (ohne www) → www.local-expert.de (www-Präferenz)
+    if (rawHost === 'local-expert.de') {
       const newUrl = 'https://www.local-expert.de' + url.pathname + url.search;
       return Response.redirect(newUrl, 301);
     }
