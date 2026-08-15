@@ -795,7 +795,7 @@
     var btn = document.querySelector('.modal-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Prüfe Verfügbarkeit…'; }
     try {
-      var resp = await fetch('https://lokale-marktmacht-authority.base44.app/api/functions/receivePublicLead', {
+      var resp = await fetch('https://app.local-expert.de/api/functions/receivePublicLead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: email, email: email, industry: branche, location: stadt, platform_domain: 'local-expert.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branche + ', Stadt: ' + stadt })
