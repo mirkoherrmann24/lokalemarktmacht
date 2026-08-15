@@ -5,39 +5,33 @@ export default {
     const rawHost = url.hostname;
     const hostname = rawHost.replace(/^www\./, '');
 
-    // Rebranding: alte Domain lokalemarktmacht.de dauerhaft auf www.local-expert.de weiterleiten
     if (hostname === 'lokalemarktmacht.de') {
-      const newUrl = 'https://www.local-expert.de' + url.pathname + url.search;
-      return Response.redirect(newUrl, 301);
+      return Response.redirect('https://www.local-expert.de' + url.pathname + url.search, 301);
     }
-
-    // Apex local-expert.de (ohne www) → www.local-expert.de (www-Präferenz)
     if (rawHost === 'local-expert.de') {
-      const newUrl = 'https://www.local-expert.de' + url.pathname + url.search;
-      return Response.redirect(newUrl, 301);
+      return Response.redirect('https://www.local-expert.de' + url.pathname + url.search, 301);
     }
 
     const path = url.pathname;
-
-    // Build asset path within sites/${hostname}/
     let assetPath = '/sites/' + hostname + path;
-
-    // Normalize: directory paths get index.html appended
     if (assetPath.endsWith('/')) {
       assetPath += 'index.html';
     } else if (!assetPath.split('/').pop().includes('.')) {
       assetPath += '/index.html';
     }
 
-    // Try to serve the asset
     let response = await env.ASSETS.fetch(new URL(assetPath, url.origin));
 
-    // If 404 and path had no trailing slash, try as directory
     if (response.status === 404 && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
-      const dirPath = '/sites/' + hostname + path + '/index.html';
-      response = await env.ASSETS.fetch(new URL(dirPath, url.origin));
+      response = await env.ASSETS.fetch(new URL('/sites/' + hostname + path + '/index.html', url.origin));
     }
 
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('text/html')) {
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('Cache-Control', 'no-cache, must-revalidate');
+      return new Response(response.body, { status: response.status, statusText: response.statusText, headers: newHeaders });
+    }
     return response;
   }
 };
