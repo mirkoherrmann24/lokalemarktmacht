@@ -785,25 +785,58 @@
   }
 </script>
 
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(7,22,40,0.88);z-index:9999;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#0D1F33;border:1px solid rgba(200,168,75,0.25);max-width:480px;width:100%;padding:40px 36px;position:relative;box-sizing:border-box;}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#C8A84B,transparent);}
+.modal-eyebrow{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#C8A84B;margin-bottom:12px;}
+.modal-box h2{font-family:Georgia,serif;font-size:26px;font-weight:400;color:#F5F0E8;line-height:1.3;margin:0 0 8px;}
+.modal-sub{font-family:Arial,sans-serif;font-size:14px;color:#8A9BAD;line-height:1.6;margin:0 0 28px;}
+.modal-form{display:flex;flex-direction:column;gap:16px;}
+.modal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.modal-field label{display:block;font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8A9BAD;margin-bottom:6px;}
+.modal-field input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#F5F0E8;font-size:15px;padding:12px 14px;outline:none;font-family:Arial,sans-serif;box-sizing:border-box;}
+.modal-field input:focus{border-color:rgba(200,168,75,0.55);}
+.modal-field input::placeholder{color:rgba(138,155,173,0.5);}
+.modal-btn{display:block;width:100%;padding:14px;background:#C8A84B;color:#071628;border:none;font-family:Arial,sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;cursor:pointer;margin-top:8px;}
+.modal-btn:hover{background:#D4B85E;}
+.modal-btn:disabled{opacity:0.6;cursor:default;}
+.modal-close{position:absolute;top:14px;right:18px;color:#8A9BAD;font-size:28px;cursor:pointer;line-height:1;background:none;border:none;padding:0;}
+.modal-close:hover{color:#F5F0E8;}
+@media(max-width:520px){.modal-form-row{grid-template-columns:1fr;}.modal-box{padding:32px 24px;}}
+</style>
 <script>
 (function(){
+  var overlay = document.getElementById('modalOverlay');
+  if (overlay) {
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal-box"><button class="modal-close" onclick="closeModal()" aria-label="Schließen">&times;</button><div class="modal-eyebrow">Verfügbarkeit prüfen</div><h2>Ihr Markt noch frei?</h2><p class="modal-sub">Prüfen Sie kostenlos, ob Ihre Stadt und Branche noch verfügbar sind.</p><form class="modal-form" onsubmit="event.preventDefault(); submitModal();"><div class="modal-field"><label>Firma *</label><input type="text" id="firma" placeholder="Ihre Firma" required></div><div class="modal-form-row"><div class="modal-field"><label>Vorname *</label><input type="text" id="vorname" placeholder="Vorname" required></div><div class="modal-field"><label>Nachname *</label><input type="text" id="nachname" placeholder="Nachname" required></div></div><div class="modal-form-row"><div class="modal-field"><label>Branche *</label><input type="text" id="branche" placeholder="z.B. Holzbau" required></div><div class="modal-field"><label>Stadt *</label><input type="text" id="stadt" placeholder="z.B. Berlin" required></div></div><div class="modal-form-row"><div class="modal-field"><label>E-Mail *</label><input type="email" id="email" placeholder="ihre@email.de" required></div><div class="modal-field"><label>Telefon</label><input type="tel" id="telefon" placeholder="Rückrufnummer"></div></div><button type="submit" class="modal-btn">Jetzt prüfen →</button></form></div>';
+  }
+  window.openModal = function(){ var m = document.getElementById('modalOverlay'); if (m) m.classList.add('open'); };
+  window.closeModal = function(){ var m = document.getElementById('modalOverlay'); if (m) m.classList.remove('open'); };
+  window.closeOnOverlay = function(e){ if (e.target === e.currentTarget) closeModal(); };
   window.submitModal = async function(){
-    var branche = document.getElementById('branche').value;
+    var firma = document.getElementById('firma').value.trim();
+    var vorname = document.getElementById('vorname').value.trim();
+    var nachname = document.getElementById('nachname').value.trim();
+    var branche = document.getElementById('branche').value.trim();
     var stadt = document.getElementById('stadt').value.trim();
     var email = document.getElementById('email').value.trim();
-    if (!branche || !stadt || !email) { alert('Bitte füllen Sie alle Felder aus.'); return; }
+    var telefon = document.getElementById('telefon').value.trim();
+    if (!firma || !vorname || !nachname || !branche || !stadt || !email) { alert('Bitte füllen Sie alle Felder aus.'); return; }
     var btn = document.querySelector('.modal-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Prüfe Verfügbarkeit…'; }
     try {
       var resp = await fetch('https://app.local-expert.de/api/functions/receivePublicLead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: email, email: email, industry: branche, location: stadt, platform_domain: 'local-expert.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branche + ', Stadt: ' + stadt })
+        body: JSON.stringify({ company_name: firma, vorname: vorname, nachname: nachname, name: vorname + ' ' + nachname, email: email, phone: telefon, industry: branche, location: stadt, platform_domain: 'local-expert.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branche + ', Stadt: ' + stadt + ', Firma: ' + firma })
       });
       if (!resp.ok) throw new Error('Server-Fehler');
-      var modal = document.getElementById('modal');
-      if (modal) {
-        modal.innerHTML = '<div class="modal-eyebrow">Vielen Dank!</div><h2>Wir prüfen Ihre Verfügbarkeit</h2><p class="modal-sub">Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen unter ' + email + '.</p><button class="modal-btn" onclick="closeModal()">Schließen</button>';
+      var box = document.querySelector('.modal-box');
+      if (box) {
+        box.innerHTML = '<button class="modal-close" onclick="closeModal()" aria-label="Schließen">&times;</button><div class="modal-eyebrow">Vielen Dank!</div><h2>Wir prüfen Ihre Verfügbarkeit</h2><p class="modal-sub">Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen unter ' + email + '.</p><button class="modal-btn" onclick="closeModal()">Schließen</button>';
       } else {
         alert('Vielen Dank! Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.');
         closeModal();
