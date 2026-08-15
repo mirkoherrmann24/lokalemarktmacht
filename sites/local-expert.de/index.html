@@ -4,809 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sichtbarkeit, Reputation &amp; Leads für Experten | Local Expert</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --deep:   #071628;
-      --navy:   #0B1F35;
-      --gold:   #C8A84B;
-      --gold2:  #E2C46E;
-      --white:  #F5F0E8;
-      --muted:  #8A9BAD;
-      --border: rgba(200,168,75,0.18);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Georgia', serif;
-      background: var(--deep);
-      color: var(--white);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Grid overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(7,22,40,0.96);
-      border-bottom: 1px solid rgba(200,168,75,0.08);
-      backdrop-filter: blur(8px);
-    }
-    .logo {
-      font-family: Arial, sans-serif;
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .logo span { color: rgba(245,240,232,0.3); margin: 0 8px; font-weight: 400; }
-    .nav-cta {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--deep);
-      background: var(--gold);
-      padding: 13px 28px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-    .nav-cta:hover { background: var(--gold2); }
-
-    /* ─── HERO ─── */
-    .hero {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 48px 100px;
-    }
-    .hero-inner {
-      max-width: 820px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .hero-preline {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-      opacity: 0.9;
-    }
-    .hero-preline::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
-    }
-
-    h1 {
-      font-size: clamp(34px, 5.5vw, 68px);
-      font-weight: 400;
-      line-height: 1.12;
-      letter-spacing: -0.5px;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-question {
-      font-size: clamp(18px, 2.4vw, 26px);
-      font-weight: 400;
-      line-height: 1.45;
-      color: rgba(245,240,232,0.55);
-      font-style: italic;
-      margin-bottom: 36px;
-      padding-left: 20px;
-      border-left: 2px solid rgba(200,168,75,0.35);
-    }
-
-    .hero-sub {
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.85;
-      max-width: 660px;
-      margin-bottom: 52px;
-    }
-    .hero-sub strong {
-      color: var(--white);
-      font-weight: 400;
-    }
-
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--deep);
-      background: var(--gold);
-      padding: 18px 40px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
-    .btn-note {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      opacity: 0.6;
-    }
-
-    /* ─── SECTION SHARED ─── */
-    section { position: relative; z-index: 1; }
-
-    /* ─── EXPERT SECTION ─── */
-    .expert-section {
-      padding: 100px 48px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .expert-inner {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .section-eyebrow {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .section-eyebrow::before {
-      content: '';
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.4;
-    }
-
-    .three-cols {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(200,168,75,0.1);
-    }
-    .col {
-      background: var(--deep);
-      padding: 44px 36px;
-      position: relative;
-    }
-    .col-number {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: rgba(200,168,75,0.35);
-      margin-bottom: 24px;
-      font-weight: 700;
-    }
-    .col h3 {
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 16px;
-      line-height: 1.25;
-    }
-    .col h3 em { font-style: italic; color: var(--gold); }
-    .col p {
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* ─── EXCLUSIVITY STRIP ─── */
-    .excl-section {
-      padding: 80px 48px;
-      background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, transparent 60%);
-      border-top: 1px solid rgba(200,168,75,0.12);
-      border-bottom: 1px solid rgba(200,168,75,0.12);
-    }
-    .excl-inner {
-      max-width: 820px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 60px;
-      align-items: center;
-    }
-    .excl-text h2 {
-      font-size: clamp(22px, 3vw, 34px);
-      font-weight: 400;
-      line-height: 1.25;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
-    .excl-text h2 em { font-style: italic; color: var(--gold); }
-    .excl-text p {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 560px;
-    }
-    .excl-badge {
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .excl-badge-ring {
-      width: 148px;
-      height: 148px;
-      border: 1px solid rgba(200,168,75,0.3);
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      position: relative;
-    }
-    .excl-badge-ring::before {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border: 1px solid rgba(200,168,75,0.12);
-      border-radius: 50%;
-    }
-    .excl-n { font-family: Arial, sans-serif; font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; }
-    .excl-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,168,75,0.6); }
-
-    /* ─── OMNI STRIP ─── */
-    .omni-section {
-      padding: 100px 48px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .omni-inner {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .omni-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 52px;
-    }
-    .omni-text h2 {
-      font-size: clamp(24px, 3.2vw, 36px);
-      font-weight: 400;
-      line-height: 1.25;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-    .omni-text h2 em { font-style: italic; color: var(--gold); }
-    .omni-text p {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-    .omni-items { display: flex; flex-direction: column; gap: 16px; }
-    .omni-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .omni-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 7px;
-      opacity: 0.7;
-    }
-    .omni-item-text {
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-    .omni-item-text strong { color: var(--white); font-weight: 400; }
-
-    /* ─── FINAL CTA ─── */
-    .final-cta {
-      padding: 100px 48px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .final-cta h2 {
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-    .final-cta h2 em { font-style: italic; color: var(--gold); }
-    .final-cta p {
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      color: var(--muted);
-      margin-bottom: 44px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 28px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      z-index: 1;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-logo {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      color: rgba(138,155,173,0.5);
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--muted); }
-
-    /* ─── MODAL ─── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(4,13,24,0.92);
-      z-index: 500;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: #0D1F33;
-      border: 1px solid var(--border);
-      max-width: 520px;
-      width: 100%;
-      padding: 52px 48px;
-      position: relative;
-    }
-    .modal::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-    }
-    .modal-close {
-      position: absolute;
-      top: 20px; right: 24px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 24px;
-      cursor: pointer;
-      line-height: 1;
-      padding: 4px;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--white); }
-    .modal-eyebrow {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-    .modal h2 {
-      font-size: clamp(22px, 3.5vw, 30px);
-      font-weight: 400;
-      line-height: 1.25;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-    .modal-sub {
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 32px;
-      line-height: 1.65;
-    }
-    .modal-field {
-      margin-bottom: 16px;
-    }
-    .modal-field label {
-      display: block;
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .modal-field input {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--white);
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      padding: 14px 18px;
-      outline: none;
-      transition: border-color 0.2s;
-      border-radius: 0;
-    }
-    .modal-field input:focus { border-color: rgba(200,168,75,0.5); }
-    .modal-field input::placeholder { color: rgba(138,155,173,0.35); }
-    .modal-field select {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--white);
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      padding: 14px 18px;
-      outline: none;
-      transition: border-color 0.2s;
-      border-radius: 0;
-      cursor: pointer;
-      appearance: none;
-    }
-    .modal-field select:focus { border-color: rgba(200,168,75,0.5); }
-    .modal-field select option { background: #0D1F33; color: var(--white); }
-    .modal-btn {
-      width: 100%;
-      background: var(--gold);
-      color: var(--deep);
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 18px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-top: 8px;
-    }
-    .modal-btn:hover { background: var(--gold2); }
-    .modal-note {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      opacity: 0.5;
-      text-align: center;
-      margin-top: 16px;
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 860px) {
-      nav { padding: 16px 24px; }
-      .hero { padding: 120px 24px 80px; }
-      .expert-section, .excl-section, .omni-section, .final-cta { padding: 72px 24px; }
-      .three-cols { grid-template-columns: 1fr; }
-      .excl-inner { grid-template-columns: 1fr; gap: 36px; }
-      .excl-badge { display: none; }
-      .omni-grid { grid-template-columns: 1fr; gap: 48px; }
-      .modal { padding: 40px 28px; }
-      footer { padding: 24px 20px; }
-    }
-  </style>
+  <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --black:#141414; --gold:#C9A43A; --gold2:#DFB84E; --bg:#FAFAF7; --bg2:#F0EFE9; --border:#E2E0D8; --text:#242424; --muted:#6B6B6B; --white:#FFFFFF; }
+html { scroll-behavior:smooth; }
+body { font-family:Georgia,serif; background:var(--bg); color:var(--text); font-size:17px; line-height:1.8; }
+a { color:var(--gold); text-decoration:none; transition:opacity .2s; }
+a:hover { opacity:.75; }
+nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; }
+.nav-links { display:flex; align-items:center; gap:28px; }
+.nav-links a { font-family:Arial,sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.nav-links a:hover { color:var(--black); opacity:1; }
+.hero { position:relative; width:100%; height:clamp(320px,50vh,520px); overflow:hidden; background:var(--black); }
+.hero-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.25) 100%); display:flex; align-items:flex-end; }
+.hero-inner { max-width:900px; margin:0 auto; width:100%; padding:0 32px 48px; }
+.hero-eyebrow { font-family:Arial,sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.hero-eyebrow::before { content:""; width:28px; height:2px; background:var(--gold); display:block; }
+.hero h1 { font-size:clamp(28px,5vw,48px); font-weight:400; line-height:1.15; color:var(--white); margin-bottom:14px; letter-spacing:-.3px; }
+.hero-subtitle { font-family:Arial,sans-serif; font-size:18px; color:rgba(255,255,255,.85); line-height:1.6; max-width:700px; }
+article { max-width:900px; margin:0 auto; padding:48px 32px; }
+h2 { font-size:clamp(20px,2.8vw,28px); font-weight:400; color:var(--black); margin-bottom:20px; line-height:1.3; }
+h3 { font-family:Arial,sans-serif; font-size:16px; font-weight:700; color:var(--black); margin-bottom:10px; margin-top:28px; }
+p { margin-bottom:20px; }
+p:last-child { margin-bottom:0; }
+.content-body h2 { margin-top:36px; }
+.service-area { background:var(--bg2); border-top:1px solid var(--border); padding:18px 24px; margin:32px 0 0; font-family:Arial,sans-serif; font-size:13px; color:var(--muted); line-height:1.7; display:flex; align-items:flex-start; gap:8px; }
+.service-area svg { flex-shrink:0; margin-top:2px; color:var(--muted); }
+.service-area strong { color:var(--text); }
+.form-section { background:var(--black); padding:64px 32px; }
+.form-section-inner { max-width:640px; margin:0 auto; }
+.form-section h2 { font-size:clamp(24px,3vw,32px); font-weight:400; color:var(--white); margin-bottom:10px; line-height:1.3; }
+.form-intro { font-family:Arial,sans-serif; font-size:15px; color:rgba(255,255,255,.65); margin-bottom:28px; line-height:1.55; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px; }
+.form-group { margin-bottom:12px; }
+.form-group label { display:block; font-family:Arial,sans-serif; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:5px; }
+.form-group input, .form-group textarea { width:100%; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05); color:var(--white); font-family:Arial,sans-serif; font-size:15px; padding:12px 14px; outline:none; border-radius:0; appearance:none; transition:border-color .2s; resize:vertical; }
+.form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,.35); }
+.form-group input:focus, .form-group textarea:focus { border-color:var(--gold); }
+.form-group textarea { min-height:100px; }
+.form-consent { display:flex; gap:12px; align-items:flex-start; margin:14px 0 20px; }
+.form-consent input[type=checkbox] { margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--gold); cursor:pointer; }
+.form-consent label { font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,.55); line-height:1.55; cursor:pointer; }
+.btn-submit { width:100%; background:var(--gold); color:var(--black); font-family:Arial,sans-serif; font-size:15px; font-weight:700; letter-spacing:1px; padding:15px; border:none; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; gap:10px; }
+.btn-submit:hover { background:var(--gold2); }
+.form-note { font-family:Arial,sans-serif; font-size:13px; color:rgba(255,255,255,.4); margin-top:14px; text-align:center; }
+footer { background:var(--white); border-top:1px solid var(--border); padding:28px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+.footer-links a { font-family:Arial,sans-serif; font-size:13px; color:var(--muted); }
+.footer-links a:hover { color:var(--black); opacity:1; }
+.footer-note { font-family:Arial,sans-serif; font-size:12px; color:#C0C0C0; }
+@media (max-width:700px) { nav { padding:0 20px; } .hero { height:clamp(280px,40vh,380px); } .hero-inner { padding:0 20px 32px; } article { padding:32px 20px; } .form-section { padding:40px 20px; } .form-row { grid-template-columns:1fr; } footer { padding:24px 20px; } }</style>
 <meta name="description" content="Local Expert macht Dienstleister zu Experten - transparent und profitabel. Sichern Sie sich Ihren Status - exklusiv in Ihrer Region">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Local Expert","url":"https://local-expert.de/","publisher":{"@type":"Organization","name":"Local Expert","url":"https://local-expert.de/"}}</script>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <div class="logo">Lokale<span>·</span>Marktmacht</div>
-  <button class="nav-cta" onclick="openModal()">Jetzt Verfügbarkeit checken</button>
+  <a href="/"><span style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:var(--black);letter-spacing:-.3px;">Local Expert</span></a>
+  <div class="nav-links">
+    <a href="#kontakt">KONTAKT</a>
+  </div>
 </nav>
-
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-preline">Local Expert</div>
-
-    <h1>Vom Dienstleister<br>zum nachgefragten<br><em>Experten.</em></h1>
-
-    <p class="hero-question">
-      „Wenn jemand in Ihrer Stadt nach Ihrer Expertise sucht –<br>werden Sie dort als <em>Experte</em> wahrgenommen?"
-    </p>
-
-    <p class="hero-sub">
-      Wir schaffen lokale Omnipräsenz für spezialisierte Fachleute –
-      durch redaktionelle Expertenbeiträge, die bei Google <strong>und in KI-Suchen</strong> sichtbar sind.
-      Höchste Qualitätsansprüche, redaktionelle Expertise und echte Kompetenz in der Leadgenerierung –
-      kombiniert in einem System, das für Sie arbeitet.
-    </p>
-
-    <div class="hero-ctas">
-      <button class="btn-primary" onclick="openModal()">Verfügbarkeit prüfen →</button>
-      <span class="btn-note">Kostenlos &amp; unverbindlich</span>
+  
+  <div class="hero-overlay">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Local Expert</div>
+      <h1>Local Expert</h1>
+      <p class="hero-subtitle"></p>
     </div>
   </div>
 </section>
-
-<!-- ══════════════════════════════════════
-     DREI SÄULEN
-══════════════════════════════════════ -->
-<section class="expert-section">
-  <div class="expert-inner">
-    <div class="section-eyebrow">Wie es funktioniert</div>
-    <div class="three-cols">
-
-      <div class="col">
-        <div class="col-number">01</div>
-        <h3>Relevanz</h3>
-        <p>
-          Wer Sie online nicht als Experten wahrnimmt, fragt woanders an.
-          Wir positionieren Sie als die erste Adresse für Ihre Spezialisierung –
-          mit redaktionellen Beiträgen, die Kompetenz beweisen statt nur behaupten.
-        </p>
-      </div>
-
-      <div class="col">
-        <div class="col-number">02</div>
-        <h3>Lokale <em>Omnipräsenz</em></h3>
-        <p>
-          Ihr Name und Ihre Expertise erscheinen dort, wo Ihre Zielkunden suchen –
-          bei Google, in Google News und in den Antworten moderner KI-Systeme.
-          Sichtbar. Relevant. Lokal verankert.
-        </p>
-      </div>
-
-      <div class="col">
-        <div class="col-number">03</div>
-        <h3>Qualifizierte <em>Leads</em></h3>
-        <p>
-          Kein Marketing-Voodoo, keine leeren Versprechen.
-          Wir messen Ergebnisse: qualifizierte Anfragen von Menschen,
-          die Sie bereits als Experten kennen – bevor Sie das erste Gespräch führen.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     EXKLUSIVITÄT
-══════════════════════════════════════ -->
-<section class="excl-section">
-  <div class="excl-inner">
-    <div class="excl-text">
-      <h2>Wir suchen keine Kunden.<br>Wir suchen <em>Partner.</em></h2>
-      <p>
-        Deshalb arbeiten wir in jeder Stadt, in jeder Branche,
-        mit genau einem einzigen Partner zusammen. Nicht weil wir knapp sind –
-        sondern weil echte Marktführerschaft keine Kompromisse verträgt.
-        Wer der nachgefragte Experte in seiner Region sein will,
-        darf das nicht mit dem Wettbewerber teilen.
-      </p>
-      <p style="margin-top: 16px; color: rgba(200,168,75,0.75);">
-        Ihr Markt könnte schon morgen vergeben sein.
-      </p>
-    </div>
-    <div class="excl-badge">
-      <div class="excl-badge-ring">
-        <span class="excl-n">1</span>
-        <span class="excl-label">Pro Stadt</span>
-        <span class="excl-label">Pro Branche</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     OMNIPRÄSENZ
-══════════════════════════════════════ -->
-<section class="omni-section">
-  <div class="omni-inner">
-    <div class="section-eyebrow">Lokale Omnipräsenz</div>
-    <div class="omni-grid">
-      <div class="omni-text">
-        <h2>Sichtbar dort, wo Ihre Kunden Sie <em>suchen.</em></h2>
-        <p>
-          Wir schaffen ein Netz redaktioneller Expertenbeiträge –
-          mit maximaler Transparenz, ohne Marketing-Voodoo.
-          Jeder Beitrag ist ein Beweis Ihrer Kompetenz,
-          indexiert von Google und als verlässliche Quelle von KI-Systemen genutzt.
-        </p>
-      </div>
-      <div class="omni-items">
-        <div class="omni-item">
-          <div class="omni-dot"></div>
-          <div class="omni-item-text"><strong>Google &amp; Google News</strong> – redaktionelle Sichtbarkeit mit journalistischer Qualität</div>
-        </div>
-        <div class="omni-item">
-          <div class="omni-dot"></div>
-          <div class="omni-item-text"><strong>KI-Suchen</strong> – Ihre Expertise als Antwort, wenn ChatGPT, Perplexity &amp; Co. gefragt werden</div>
-        </div>
-        <div class="omni-item">
-          <div class="omni-dot"></div>
-          <div class="omni-item-text"><strong>Local Authority Pages</strong> – Profilseiten, die Vertrauen aufbauen bevor das erste Gespräch stattfindet</div>
-        </div>
-        <div class="omni-item">
-          <div class="omni-dot"></div>
-          <div class="omni-item-text"><strong>Pay per qualified Lead</strong> – Sie zahlen für Ergebnisse, nicht für Reichweite</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FINAL CTA
-══════════════════════════════════════ -->
-<section class="final-cta">
-  <h2>Ist Ihr Markt<br>noch <em>frei?</em></h2>
-  <p>Prüfen Sie jetzt, ob Ihre Stadt und Ihre Branche noch verfügbar sind. Kostenlos und unverbindlich.</p>
-  <button class="btn-primary" onclick="openModal()">Verfügbarkeit prüfen →</button>
-</section>
-
-<!-- ─── FOOTER ─── -->
+<article>
+  <div class="content-body"></div>
+  
+</article>
+<section class="form-section" id="kontakt"><div class="form-section-inner"><h2>Sie sind Experte und wollen gehört werden?</h2><form action="https://lokale-marktmacht-authority.base44.app/api/functions/receivePublicLead" method="POST"><input type="hidden" name="lead_source" value="Startseite"><input type="hidden" name="platform_domain" value="local-expert.de"><input type="hidden" name="_hp_company" value=""><div class="form-group"><label>Firmenname *</label><input type="text" name="company_name" placeholder="Ihre Firma" required></div><div class="form-row"><div class="form-group"><label>Vorname *</label><input type="text" name="vorname" placeholder="Ihr Vorname" required></div><div class="form-group"><label>Nachname *</label><input type="text" name="nachname" placeholder="Ihr Nachname" required></div></div><div class="form-row"><div class="form-group"><label>E-Mail *</label><input type="email" name="email" placeholder="ihre@email.de" required></div><div class="form-group"><label>Telefon</label><input type="tel" name="phone" placeholder="+49 ..."></div></div><div class="form-group"><label>Ihr Anliegen *</label><textarea name="project_description" placeholder="Worum geht es?" required></textarea></div><div class="form-consent"><input type="checkbox" id="consent" name="privacy_consent" required><label for="consent">Ich willige ein, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden.</label></div><button type="submit" class="btn-submit">Ja, ich will gehört werden</button></form></div></section>
 <footer>
-  <div class="footer-logo">Lokale · Marktmacht</div>
+  <a href="/"><span style="font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--black);letter-spacing:-.3px;">Local Expert</span></a>
+  <div class="footer-note">© 2026 Local Expert — Ein Projekt von Lokale Marktmacht</div>
   <div class="footer-links">
-    <a href="/impressum/">Impressum</a>
-    <a href="/datenschutz/">Datenschutz</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://www.holzbau-lokal.de/#kontakt">Holzbau-Experte</a>
   </div>
 </footer>
-
-<!-- ══════════════════════════════════════
-     MODAL
-══════════════════════════════════════ -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
-  <div class="modal" id="modal">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-eyebrow">Verfügbarkeit prüfen</div>
-    <h2>Ist Ihr Markt noch frei?</h2>
-    <p class="modal-sub">Wir prüfen, ob Ihre Stadt und Ihre Branche noch verfügbar sind – und melden uns persönlich.</p>
-    <div class="modal-field">
-      <label>Ihre Branche</label>
-      <select id="branche">
-        <option value="">Bitte auswählen</option>
-        <option>Holzbau / Zimmerer</option>
-        <option>Dachdeckerei</option>
-        <option>Steuerberatung</option>
-        <option>Immobilienmakler</option>
-        <option>Rechtsanwalt</option>
-        <option>Architekt</option>
-        <option>Unternehmensberatung</option>
-        <option>Andere Branche</option>
-      </select>
-    </div>
-    <div class="modal-field">
-      <label>Ihre Stadt / Region</label>
-      <input type="text" id="stadt" placeholder="z. B. Frankfurt am Main">
-    </div>
-    <div class="modal-field">
-      <label>Ihre E-Mail</label>
-      <input type="email" id="email" placeholder="ihre@email.de">
-    </div>
-    <button class="modal-btn" onclick="submitModal()">Jetzt prüfen →</button>
-    <p class="modal-note">Kostenlos &amp; unverbindlich · Kein Spam</p>
-  </div>
-</div>
-
-<script>
-  function openModal() {
-    document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function closeOnOverlay(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  function submitModal() {
-    const branche = document.getElementById('branche').value;
-    const stadt   = document.getElementById('stadt').value.trim();
-    const email   = document.getElementById('email').value.trim();
-    if (!branche || !stadt || !email) {
-      alert('Bitte alle Felder ausfüllen.');
-      return;
-    }
-    const subject = encodeURIComponent(`Verfügbarkeitsanfrage: ${branche} in ${stadt}`);
-    const body    = encodeURIComponent(`Branche: ${branche}\nStadt: ${stadt}\nE-Mail: ${email}`);
-    window.location.href = `mailto:office@herrmann.marketing?subject=${subject}&body=${body}`;
-    closeModal();
-  }
-</script>
-
 <script>
 (function(){
-  window.submitModal = async function(){
-    var branche = document.getElementById('branche').value;
-    var stadt = document.getElementById('stadt').value.trim();
-    var email = document.getElementById('email').value.trim();
-    if (!branche || !stadt || !email) { alert('Bitte füllen Sie alle Felder aus.'); return; }
-    var btn = document.querySelector('.modal-btn');
-    if (btn) { btn.disabled = true; btn.textContent = 'Prüfe Verfügbarkeit…'; }
-    try {
-      var resp = await fetch('https://lokale-marktmacht-authority.base44.app/api/functions/receivePublicLead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: email, email: email, industry: branche, location: stadt, platform_domain: 'local-expert.de', lead_source: 'verfuegbarkeits_pruefung', project_description: 'Verfügbarkeitsprüfung — Branche: ' + branche + ', Stadt: ' + stadt })
+  function init(){
+    var forms = document.querySelectorAll('form[action*="receivePublicLead"]');
+    forms.forEach(function(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var btn = form.querySelector('.btn-submit');
+        if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; }
+        var formData = new FormData(form);
+        fetch(form.action, { method: 'POST', body: formData })
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            if(data.success){
+              var msg = document.createElement('div');
+              msg.className = 'form-success';
+              msg.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Ihre Anfrage wurde erfolgreich übermittelt</h3><p>Wir melden uns schnellstmöglich bei Ihnen.</p>';
+              msg.style.cssText = 'text-align:center;padding:3rem 1.5rem;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;';
+              msg.querySelector('h3').style.cssText = 'font-size:1.25rem;font-weight:600;color:#15803d;margin:1rem 0 0.5rem;';
+              msg.querySelector('p').style.cssText = 'font-size:0.95rem;color:#16a34a;margin:0;';
+              form.parentNode.replaceChild(msg, form);
+            } else {
+              alert(data.error || 'Ein Fehler ist aufgetreten.');
+              if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+            }
+          })
+          .catch(function(){
+            alert('Netzwerkfehler — bitte versuchen Sie es erneut.');
+            if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+          });
       });
-      if (!resp.ok) throw new Error('Server-Fehler');
-      var modal = document.getElementById('modal');
-      if (modal) {
-        modal.innerHTML = '<div class="modal-eyebrow">Vielen Dank!</div><h2>Wir prüfen Ihre Verfügbarkeit</h2><p class="modal-sub">Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen unter ' + email + '.</p><button class="modal-btn" onclick="closeModal()">Schließen</button>';
-      } else {
-        alert('Vielen Dank! Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.');
-        closeModal();
-      }
-    } catch(e) {
-      if (btn) { btn.disabled = false; btn.textContent = 'Jetzt prüfen →'; }
-      alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
-    }
-  };
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 </body>
