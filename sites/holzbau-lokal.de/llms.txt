@@ -19,6 +19,7 @@ Website: https://www.holzbau-lokal.de/
 
 ## Veröffentlichte Fachbeiträge
 
+- [Holzrahmenbau in Oberursel | Bohn Holzbau & Dachdeckerei](https://www.holzbau-lokal.de/bohn/holzrahmenbau/oberursel/) — Holzrahmenbau · Oberursel
 - [Zimmerei Oberursel | Fachgerechter Holzbau von Bohn Holzbau](https://www.holzbau-lokal.de/bohn/zimmerei/oberursel/) — Zimmerei · Oberursel
 - [Energetische Sanierung Rhein-Main | Bohn Holzbau](https://www.holzbau-lokal.de/bohn/energetische-sanierung/rhein-main-region/) — Energetische Sanierung · Rhein-Main (Region)
 - [Zimmerei in Frankfurt am Main | Bohn Holzbau & Dachdeckerei](https://www.holzbau-lokal.de/bohn/zimmerei/frankfurt-am-main/) — Zimmerei · Frankfurt am Main
@@ -26,6 +27,5 @@ Website: https://www.holzbau-lokal.de/
 - [Dachdecker in Oberursel | Bohn Holzbau & Dachdeckerei GmbH](https://www.holzbau-lokal.de/bohn/dachdecker/oberursel/) — Dachdecker · Oberursel
 - [Dachdecker in Wiesbaden | Bohn Holzbau & Dachdeckerei](https://www.holzbau-lokal.de/bohn/dachdecker/wiesbaden/) — Dachdecker · Wiesbaden
 - [Dachdecker in der Rhein-Main-Region | Bohn Holzbau & Dachdeckerei](https://www.holzbau-lokal.de/bohn/dachdecker/rhein-main-region/) — Dachdecker · Rhein-Main (Region)
-- [Holzrahmenbau in Oberursel | Bohn Holzbau & Dachdeckerei](https://www.holzbau-lokal.de/bohn/holzrahmenbau/oberursel/) — Holzrahmenbau · Oberursel
 - [Dachausbau in Frankfurt am Main | Nachhaltiger Wohnraum vom Meisterbetrieb Bohn](https://www.holzbau-lokal.de/bohn/dachausbau/frankfurt-am-main/) — Dachausbau · Frankfurt am Main
 - [Dachdecker Frankfurt am Main | Meisterbetrieb Bohn Holzbau](https://www.holzbau-lokal.de/bohn/dachdecker/frankfurt-am-main/) — Dachdecker · Frankfurt am Main
