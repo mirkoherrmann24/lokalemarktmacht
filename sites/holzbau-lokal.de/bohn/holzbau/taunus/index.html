@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holzbau Taunus | Individuelle Lösungen von Bohn Holzbau | Holzbau Lokal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #141414; --gold: #C9A43A; --gold2: #DFB84E;
+      --bg: #FAFAF7; --bg2: #F0EFE9; --border: #E2E0D8;
+      --text: #242424; --muted: #6B6B6B; --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Georgia, serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.8; }
+    a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .75; }
+
+    /* NAV */
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+    .nav-cta { color: var(--white) !important; background: var(--black); padding: 10px 20px; font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+    .nav-cta:hover { background: var(--gold); opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.nav-cta) { font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .nav-links a:not(.nav-cta):hover { color: var(--black); opacity: 1; }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 900px; margin: 0 auto; padding: 16px 32px 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); }
+    .breadcrumb a:hover { color: var(--gold); opacity: 1; }
+    .breadcrumb span { opacity: .35; }
+
+    /* ARTICLE */
+    article { max-width: 900px; margin: 0 auto; padding: 32px 32px 32px; }
+
+    /* SECTION LABEL */
+    .section-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+
+    /* HERO */
+    .hero-eyebrow { font-family: Arial,sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
+    h1 { font-size: clamp(26px,4vw,40px); font-weight: 400; line-height: 1.2; color: var(--black); margin-bottom: 16px; letter-spacing: -.3px; }
+    .hero-subtitle { font-family: Arial,sans-serif; font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; max-width: 700px; }
+    .hero-byline { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .byline-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .byline-text { font-family: Arial,sans-serif; font-size: 14px; color: var(--gold); font-weight: 600; }
+
+    /* HERO IMAGE */
+    .img-hero { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; margin-bottom: 28px; background: #C8BEA8; }
+    .img-hero-wrap { position: relative; margin-bottom: 28px; }
+    .img-hero-wrap img { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; }
+    .img-caption { font-family: Arial,sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    /* FLOAT IMAGES */
+    .img-float { float: right; width: 42%; margin: 6px 0 24px 32px; }
+    .img-float.left { float: left; margin: 6px 32px 24px 0; }
+    .img-float img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .img-float .img-caption { margin-top: 6px; }
+    .clearfix::after { content: ""; display: table; clear: both; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--gold); opacity: 1; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--black); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 14px 32px; border: 2px solid var(--black); text-decoration: none; transition: all .2s; }
+    .btn-outline:hover { background: var(--black); color: var(--white); opacity: 1; }
+
+    /* HR */
+    hr { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+
+    /* BODY TEXT */
+    h2 { font-size: clamp(20px,2.8vw,28px); font-weight: 400; color: var(--black); margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-family: Arial,sans-serif; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 10px; margin-top: 28px; }
+    p { margin-bottom: 20px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box { background: var(--bg2); border-left: 4px solid var(--gold); padding: 24px 28px; margin: 32px 0; }
+    .highlight-box h3 { margin-top: 0; font-size: 17px; }
+    .highlight-box p { font-family: Arial,sans-serif; font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+
+    /* STECKBRIEF */
+    .steckbrief { background: var(--white); border: 1px solid var(--border); padding: 32px 36px; margin: 32px 0; }
+    .steckbrief-title { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .steckbrief table { width: 100%; border-collapse: collapse; }
+    .steckbrief td { font-family: Arial,sans-serif; font-size: 15px; padding: 9px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .steckbrief td:first-child { color: var(--muted); width: 42%; padding-right: 16px; }
+    .steckbrief td:last-child { color: var(--text); font-weight: 500; }
+    .steckbrief tr:last-child td { border-bottom: none; }
+
+    /* LEISTUNGEN */
+    .leistungen-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin: 24px 0; }
+    .leistung-item { background: var(--white); padding: 28px 24px; }
+    .leistung-item h3 { font-size: 15px; margin-top: 0; margin-bottom: 10px; }
+    .leistung-item p { font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .leistung-link { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* INTERVIEW */
+    .interview { background: var(--white); border: 1px solid var(--border); padding: 44px; }
+    .interview-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .expert-photo { width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0; overflow: hidden; background: #C8BEA8; }
+    .expert-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .expert-name { font-size: 19px; font-weight: 400; color: var(--black); margin-bottom: 3px; }
+    .expert-company { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .expert-city { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); opacity: .7; }
+
+    /* PULL QUOTE */
+    .pull-quote { border-left: 4px solid var(--gold); padding: 22px 28px; margin: 32px 0; background: #FBF9F4; }
+    .pull-quote-icon { font-size: 30px; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+    .pull-quote p { font-size: 19px; font-style: italic; color: var(--black); line-height: 1.5; margin-bottom: 12px; }
+    .pull-quote-author { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 48px; }
+    .gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: opacity .2s; }
+    .gallery-grid img:hover { opacity: .9; }
+
+    /* CONTACT BOX */
+    .contact-box { background: var(--black); padding: 48px; display: grid; grid-template-columns: 160px 1fr; gap: 44px; align-items: start; }
+    .contact-expert { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .contact-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(184,147,42,.35); background: #C8BEA8; }
+    .contact-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .contact-name { font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; color: var(--white); text-align: center; }
+    .contact-company { font-family: Arial,sans-serif; font-size: 12px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-city { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .stars { display: flex; gap: 2px; align-items: center; justify-content: center; }
+    .star { color: var(--gold); font-size: 13px; }
+    .rating-score { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); margin-left: 4px; }
+    .rating-label { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-content h3 { font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 14px; font-family: Georgia,serif; }
+    .contact-content p { font-family: Arial,sans-serif; font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.75; margin-bottom: 24px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--black); font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-gold:hover { background: var(--gold2); opacity: 1; }
+
+    /* SERVICE AREA */
+    .service-area { background: var(--bg2); border-top: 1px solid var(--border); padding: 18px 24px; margin: 32px 0 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); line-height: 1.7; display: flex; align-items: flex-start; gap: 8px; }
+    .service-area svg { flex-shrink: 0; margin-top: 2px; color: var(--muted); }
+    .service-area strong { color: var(--text); }
+
+    /* FOOTER */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--black); opacity: 1; }
+    .footer-note { font-family: Arial,sans-serif; font-size: 12px; color: #C0C0C0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      article { padding: 24px 20px 60px; }
+      .img-float, .img-float.left { float: none; width: 100%; margin: 0 0 24px 0; }
+      .leistungen-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+      .interview { padding: 28px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  .contact-box{margin:32px 0;}.btn-primary,.btn-gold,.btn-outline{padding:16px 34px !important;font-size:15px !important;}p:has(> a.btn-outline),p:has(> a.btn-primary){margin-top:32px !important;}.pull-quote-icon{font-size:72px !important;margin-bottom:8px !important;}
+</style>
+<link rel="icon" type="image/png" href="/favicon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Nachhaltiger Holzbau Taunus: Modernisierung mit Meisterhand","description":"Experten für Holzbau im Taunus. Professionelle Aufstockungen, Anbauten und energetische Sanierung vom Meisterbetrieb Bohn. Jetzt Erstberatung anfragen!","datePublished":"2026-09-03","dateModified":"2026-09-03","author":{"@type":"Person","name":"Alexander Bohn"},"publisher":{"@type":"Organization","name":"Holzbau Lokal","url":"https://holzbau-lokal.de/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://holzbau-lokal.de/bohn/holzbau/taunus/"},"image":["https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/3e48621f6_Bohn_Lookbook_fotos_web-0918.jpg"]}</script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="88a9b7c5-dd37-4142-a946-5fadf0e0f93e" data-blockingmode="auto" type="text/javascript"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:44px;width:auto;display:block;"></a>
+  <div class="nav-links">
+    <a href="/bohn/kontakt/" class="nav-cta">Beratungstermin →</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="/">Holzbau Lokal</a>
+  <span>/</span>
+  <a href="/bohn/">Bohn</a>
+  <span>/</span>
+  <span style="color:var(--text);">Holzbau Taunus</span>
+</div>
+
+<article>
+
+  <!-- HERO -->
+  <header style="margin-bottom:44px;">
+    <div class="hero-eyebrow">Expertenbeitrag · Taunus</div>
+    <h1>Nachhaltiger Holzbau Taunus: Modernisierung mit Meisterhand</h1>
+    <p class="hero-subtitle">Präzisionsarbeit bei Aufstockung, Anbau und energetischer Sanierung im Taunus.</p>
+    <div class="hero-byline">
+      <a href="/bohn/" class="byline-text">Holzbau-Experte Alexander Bohn</a>
+    </div>
+    <div class="img-hero-wrap">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/3e48621f6_Bohn_Lookbook_fotos_web-0918.jpg" alt="Nachhaltiger Holzbau Taunus: Modernisierung mit Meisterhand" class="img-hero">
+      <p class="img-caption"></p>
+    </div>
+    <a href="/bohn/kontakt/" class="btn-primary">Beratungstermin vereinbaren →</a>
+  </header>
+
+  <hr>
+
+  <!-- SEKTION 1: IM BLICKPUNKT -->
+  <section>
+    <div class="section-label">Im Blickpunkt</div>
+    <h2>Nachverdichtung und Wohnraumschaffung im Taunus</h2>
+    <div class="clearfix">
+      <div class="img-float">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/e6a3a7ef0_Bohn_Lookbook_fotos_web-0787.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <p>Die Suche nach Wohnraum im Taunus führt zunehmend zu einer architektonischen Herausforderung.  Während Grundstücke knapp und Bodenrichtwerte auf einem historischen Höchststand stagnieren, rückt die intelligente Nachverdichtung in den Fokus der Bauherren.</p>
+<p>Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co.  KG begegnet diesem Trend durch innovative Lösungen im Holzbau, die weit über konventionelle Sanierung hinausgehen.</p>
+<p>Hier trifft jahrzehntelange Erfahrung im Zimmererhandwerk auf den dringenden Bedarf an energetisch effizientem Wohnraum.  Der aktuelle Wandel erfordert ein präzises Gespür für den Bestand.</p>
+<p>Bestehende Immobilien, oft geprägt durch ihre gewachsene Struktur in Ortskernen wie Kronberg oder Bad Homburg, verlangen nach sensiblen Eingriffen.  Der Holzbau ermöglicht es, statische Mehrbelastungen zu minimieren und gleichzeitig den Wohnkomfort drastisch zu steigern.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 2: DER LOKALE MARKT -->
+  <section>
+    <div class="section-label">Der lokale Markt</div>
+    <h2>Klimatische Anforderungen und Bebauung im Taunus</h2>
+    <h2>Herausforderungen durch dichte Siedlungsstrukturen</h2>
+<p>Die Region Taunus ist geprägt von einer heterogenen Siedlungsstruktur. In den Ballungsgebieten rund um Frankfurt am Main führt die hohe Nachfrage zu einer massiven Nachverdichtung. Dies stellt Handwerksbetriebe vor logistische und bautechnische Hürden. Eng bebaute Grundstücke erfordern eine exakte Planung der Anlieferung und Montage, um den Betrieb auf den umliegenden Straßen nicht zu stören.</p>
+<h3>Klimatische Faktoren und thermische Belastung</h3>
+<p>Die Lage am Taunusrand bringt spezifische klimatische Bedingungen mit sich. Die städtischen Wärmeinseleffekte in den tiefer gelegenen Lagen treffen auf kühlere Temperaturen in den Höhenlagen. Dies erfordert individuelle Konzepte für den sommerlichen Wärmeschutz, um Wohnräume auch in heißen Sommern ohne exzessiven Energieeinsatz kühl zu halten. Um die korrekte Umsetzung von Brandschutz und Wärmedämmung sicherzustellen, orientiert sich der Betrieb an den Vorgaben führender Institutionen. Wie <a href="https://www.holzbau-deutschland.de">Holzbau Deutschland</a> in seinen technischen Fachinformationen darlegt, sind gerade im Holzrahmenbau die präzise Ausführung der Luftdichtigkeitsschicht und der fachgerechte Brandschutz die entscheidenden Faktoren für die Langlebigkeit und Sicherheit moderner Gebäude im Bestand.</p>
+    
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 3: DIE HERAUSFORDERUNG -->
+  <section>
+    <div class="section-label">Die Herausforderung</div>
+    <h2>Präzision in der Holzbau-Konstruktion</h2>
+    <div class="clearfix">
+      <div class="img-float left">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/4258c9326_Bohn_Lookbook_fotos_web-1055.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <h2>Präzisionsarbeit durch moderne Vorfertigung</h2>
+<p>Bei Projekten im Taunus setzt der Betrieb auf einen hohen Grad an Vorfertigung. Durch die digitale Planung und die passgenaue Fertigung in der Werkstatt verkürzen sich die Montagezeiten vor Ort erheblich. Dies schont die Nerven der Anwohner und garantiert eine gleichbleibend hohe Qualität, die durch Witterungseinflüsse auf der Baustelle nicht beeinträchtigt wird.</p>
+<h3>Energetische Transformation und Holzbau</h3>
+<p>Die energetische Aufwertung ist ein Kernbereich. Durch den Einsatz diffusionsoffener Konstruktionen entsteht ein gesundes Wohnklima, das den strengen Anforderungen an den sommerlichen Wärmeschutz im Taunus gerecht wird. Gerade bei Dachgeschossausbauten zeigt sich die Kompetenz, wenn es um den Schutz vor Überhitzung geht. Die Kombination aus massiven Holzelementen und leistungsfähigen Dämmstoffen reduziert den Energiebedarf messbar. Eigentümer, die eine umfassende Dachsanierung planen, profitieren dabei von einer gewerkeübergreifenden Abwicklung, die Schnittstellenprobleme eliminiert.</p>
+<h3>Zertifizierte Qualität im Holzbau</h3>
+<p>Qualitätssicherung bedeutet hier die Einhaltung höchster Standards. Das RAL-Gütezeichen für Holzbauwerke ist ein zentraler Indikator für die Zuverlässigkeit der Prozesse. Dies stellt sicher, dass alle verwendeten Hölzer nachhaltig beschafft wurden und die konstruktiven Details den aktuellen Regeln der Technik entsprechen, was den Bauherren eine langfristige Investitionssicherheit bietet.</p>
+    </div>
+    <h3>Statische Grenzen im Bestand</h3>
+<p>Eine zentrale Herausforderung bei der Sanierung im Taunus stellt das Alter der Bausubstanz dar. Viele Bestandsimmobilien sind für die heutigen Lastanforderungen nicht ausgelegt. Die Integration moderner Dämmstandards nach dem Gebäudeenergiegesetz (GEG) erfordert zudem ein tiefgreifendes Verständnis für bauphysikalische Abläufe, insbesondere bei der Vermeidung von Wärmebrücken an den kritischen Knotenpunkten zwischen Alt und Neu.</p>
+<h3>Komplexität durch strenge Bauvorgaben</h3>
+<p>Die regionale Bebauung unterliegt oft strengen Gestaltungssatzungen. Die Integration moderner Holzbau-Elemente in ein historisches Umfeld verlangt nach einer architektonisch anspruchsvollen Planung, die den Charakter der Region wahrt und dennoch die Anforderungen an moderne energetische Sanierungen erfüllt. Die Schwierigkeit liegt darin, die notwendige thermische Hülle mit dem Bestand harmonisch zu vereinen, ohne dabei wertvolle Wohnfläche durch überdimensionierte Wandaufbauten zu verlieren. Bauphysiker warnen zudem vor fehlerhaften Dampfdiffusionsberechnungen, die in der feuchten Taunus-Lage schnell zu Bauschäden führen können.</p>
+    <p style="margin-top:32px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 5: EXPERTEN-INTERVIEW -->
+  <section>
+    <div class="section-label">Der Experten-Hinweis</div>
+    <div class="interview">
+      <div class="interview-header">
+        <div class="expert-photo">
+          <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn">
+        </div>
+        <div>
+          <div class="expert-name">Alexander Bohn</div>
+          <div class="expert-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+          <div class="expert-city">Taunus</div>
+        </div>
+      </div>
+      <p>Wenn ich einen alten Dachstuhl begutachte, sehe ich sofort, wo die statischen Schwachstellen für eine Aufstockung liegen.  Ich schaue mir das Holz genau an, prüfe die Feuchtigkeitswerte und mache mir ein Bild davon, wie wir mit einer Holzrahmenbauweise das Gewicht gering halten können.</p>
+<p>Ich habe in meiner Laufbahn hunderte solcher Projekte betreut und weiß genau, dass es auf die saubere Anbindung an den Bestand ankommt.  Ich plane jeden Millimeter selbst, weil ich weiß, dass eine präzise Vorbereitung in der Werkstatt mir und meinem Team auf der Baustelle die Arbeit erspart.</p>
+<p>Ich liebe es, wenn ich sehe, wie ein unscheinbarer Dachraum durch den Einbau einer Gaube oder einer Loggia plötzlich zu einem lichtdurchfluteten Lebensraum wird.  Ich gehe dabei immer den Weg der höchsten Qualität, denn ich weiß, dass meine Kunden Jahrzehnte in diesen Räumen verbringen.</p>
+<p>Ich achte auf jedes Detail, von der Dämmung bis zur Verschraubung, weil ich meinen Namen für die Ausführung gebe.</p>
+      <div class="pull-quote">
+        <div class="pull-quote-icon">„</div>
+        <p>Wenn ich einen alten Dachstuhl begutachte, sehe ich sofort, wo die statischen Schwachstellen für eine Aufstockung liegen. Ich schaue mir das Holz genau an, prüfe die Feuchtigkeitswerte und mache mir ein Bild davon, wie wir mit einer Holzrahmenbauweise das Gewicht gering halten können.</p>
+        <div class="pull-quote-author">— Alexander Bohn</div>
+      </div>
+      <a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 6: REGIONALE PROJEKTE -->
+  <section>
+    <div class="section-label">Regionale Projekte</div>
+    <h2>Erfolgreiche Holzbauprojekte zwischen Bockenheim und Kronberg</h2>
+    <h2>Referenzprojekte im Taunus</h2>
+<p>Die Arbeit des Betriebs spiegelt sich in einer Vielzahl von erfolgreich abgeschlossenen Projekten in der Region wider:</p>
+<p><em>   <strong>Objekt in Bockenheim (Baujahr 1950er Jahre):</strong> Erfolgreiche Aufstockung zur Schaffung von zwei modernen Wohneinheiten, wobei die statische Ertüchtigung durch eine innovative Holzrahmenbauweise erfolgte.</p>
+<p></em>   <strong>Historisches Gebäude in Bad Homburg (Baujahr ca. 1920):</strong> Komplexe Anbaulösung, bei der Brettschichtholz (BSH) verwendet wurde, um einen modernen Kontrast zur bestehenden Klinkerfassade zu bilden.</p>
+<p>*   <strong>Einfamilienhaus in Kronberg:</strong> Implementierung einer hocheffizienten Außendämmung aus Holzfaserplatten, die den Primärenergiebedarf des Gebäudes nachweislich um über 30 Prozent senkte.</p>
+<p>Diese Projekte demonstrieren, dass die Kombination aus präziser Planung und handwerklicher Exzellenz die Basis für den Erfolg in anspruchsvollen Wohnlagen bildet. Die Auftraggeber schätzen insbesondere die Fähigkeit, auch bei unvorhergesehenen baulichen Herausforderungen, wie sie bei alten Fachwerkhäusern häufig vorkommen, kurzfristig und lösungsorientiert zu agieren.</p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 7: PARTNER VOR ORT -->
+  <section>
+    <div class="section-label">Partner vor Ort</div>
+    <h2>Geprüfte Qualität und zertifizierte Standards</h2>
+    <h2>Qualitätsversprechen und Zertifizierungen</h2>
+<p>Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG steht für eine transparente und verlässliche Projektabwicklung. Als Meisterbetrieb und zertifizierter Fachbetrieb ist das Unternehmen tief in der Region verwurzelt und verbindet handwerkliche Tradition mit innovativen Methoden. Die Einhaltung strenger Qualitätsvorgaben, dokumentiert durch das RAL-Gütezeichen, bildet das Fundament der täglichen Arbeit.</p>
+<p>| Kategorie | Detailinformation |</p>
+<p>| :--- | :--- |</p>
+<p>| Firma | Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG |</p>
+<p>| Region | Taunus / Frankfurt am Main |</p>
+<p>| Expertise | Holzbau, Aufstockung, energetische Sanierung |</p>
+<p>| Zertifikate | Meisterbetrieb, RAL-Gütezeichen, FSC-zertifizierte Hölzer |</p>
+<p>| Historie | Über 30 Jahre Erfahrung in der Holzbaubranche |</p>
+<h3>Fachliche Leitlinien</h3>
+<p>Die Einhaltung aktueller bautechnischer Normen ist obligatorisch. Dies umfasst nicht nur die statischen Anforderungen nach Eurocode 5, sondern auch die energetischen Vorgaben. Wie die zuständige <a href="https://www.hwo.de">Handwerkskammer</a> betont, sichert die kontinuierliche Qualifizierung der Mitarbeiter und die Verwendung zertifizierter Materialien ein Niveau, das über den gesetzlichen Mindeststandards liegt.</p>
+    <div class="steckbrief">
+      <div class="steckbrief-title">Steckbrief zur Expertise</div>
+      <table>
+        <tr><td>Firma</td><td>Bohn Holzbau & Dachdeckerei GmbH & Co. KG</td></tr>
+        <tr><td>Inhaber</td><td>Alexander Bohn</td></tr>
+        <tr><td>Region</td><td>Frankfurt am Main</td></tr>
+        <tr><td>Zertifikate</td><td>Meisterbetrieb, RAL Gütezeichen Holzschaffen, FSC-zertifiziert</td></tr>
+        <tr><td>Fokus</td><td>Wohnraumerweiterung bei Bestandsimmobilien</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 8: LEISTUNGSBEREICHE -->
+  <section>
+    <div class="section-label">Leistungsbereiche</div>
+    <h2>Das Leistungsspektrum vom Meisterbetrieb</h2>
+    <div class="section-text"><h2>Leistungsportfolio für den Taunus</h2>
+<p>Das Unternehmen bietet ein breites Spektrum an Leistungen rund um den Holzbau und die Dachsanierung an, das individuell auf die Bedürfnisse der Kunden im Taunus zugeschnitten ist.</p>
+<h3>Hochwertige Aufstockungen</h3>
+<p>Die Aufstockung ist die ideale Lösung für den Flächenmangel. Durch den Einsatz leichter Holzbauelemente wird wertvoller Wohnraum geschaffen, ohne das statische Gefüge des Gebäudes zu überlasten.</p>
+<h3>Individuelle Anbauten</h3>
+<p>Ein Anbau in Holzbauweise erweitert den Wohnraum flexibel und nachhaltig. Ob Wintergarten oder Wohnraumerweiterung – die Lösungen sind maßgeschneidert.</p>
+<h3>Komplexe Dachsanierungen</h3>
+<p>Die Dachsanierung umfasst den kompletten Austausch der Eindeckung, die energetische Optimierung sowie den Einbau moderner Dachfenster-Systeme.</p>
+<h3>Energetische Sanierung</h3>
+<p>Mit einer fachgerechten Dämmung und dem Einsatz nachhaltiger Materialien wird die Energieeffizienz der Immobilie signifikant gesteigert.</p></div>
+    <p style="margin-top:8px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- GALERIE -->
+  <section>
+    <div class="section-label">Eindrücke aus der Praxis</div>
+    <div class="gallery-grid">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/4258c9326_Bohn_Lookbook_fotos_web-1055.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/5bea0a072_Bohn_Lookbook_fotos_web-0915.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/95f09d3e7_Bohn_Lookbook_fotos_web-0826.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/c56dd5642_Bohn_Lookbook_fotos_web-1047.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- KONTAKTBOX -->
+  <section id="kontakt">
+    <div class="contact-box">
+      <div class="contact-expert">
+        <div class="contact-photo"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn"></div>
+        <div class="contact-name">Alexander Bohn</div>
+        <div class="contact-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+        <div class="contact-city">Taunus</div>
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+          <span class="rating-score">5.0</span>
+        </div>
+        <div class="rating-label">Google Bewertungen</div>
+      </div>
+      <div class="contact-content">
+        <h3>Jetzt Erstberatung für ein Holzbauprojekt vereinbaren</h3>
+        <p>Die Realisierung eines Holzbauprojekts im Taunus erfordert einen Partner, der die regionale Bausubstanz versteht und über die nötige handwerkliche Präzision verfügt.  Wer den Wert seiner Immobilie durch einen Anbau oder eine hochwertige Sanierung steigern möchte, findet hier eine fundierte Beratung.
+Die Weichen für ein nachhaltiges Zuhause werden heute gestellt.  Für eine fundierte Erstberatung und eine detaillierte Einschätzung des individuellen Bauvorhabens steht der Betrieb zur Verfügung.</p>
+        <a href="/bohn/kontakt/" class="btn-gold">Jetzt Kontakt aufnehmen →</a>
+      </div>
+    </div>
+  </section>
+
+<!-- SERVICE AREA -->
+<div class="service-area">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <span><strong>Expertise und Leistungen verfügbar in:</strong> Oberursel · Taunusstein · Frankfurt am Main · Rhein-Main (Region) · Wiesbaden · Taunus · Offenbach · Darmstadt · Bad Homburg · Hanau</span>
+</div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:30px;width:auto;display:block;opacity:.85;"></a>
+  <div class="footer-note">© 2026 Holzbau Lokal — Ein Projekt von Lokale Marktmacht</div>
+  <div class="footer-links">
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://www.holzbau-lokal.de/#kontakt">Holzbau-Experte</a>
+  </div>
+</footer>
+
+</body>
+</html>
