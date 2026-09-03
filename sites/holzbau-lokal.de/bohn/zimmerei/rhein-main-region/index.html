@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zimmerei Rhein-Main | Fachbetrieb für Holzbau | Bohn Holzbau | Holzbau Lokal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #141414; --gold: #C9A43A; --gold2: #DFB84E;
+      --bg: #FAFAF7; --bg2: #F0EFE9; --border: #E2E0D8;
+      --text: #242424; --muted: #6B6B6B; --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Georgia, serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.8; }
+    a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .75; }
+
+    /* NAV */
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+    .nav-cta { color: var(--white) !important; background: var(--black); padding: 10px 20px; font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+    .nav-cta:hover { background: var(--gold); opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.nav-cta) { font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .nav-links a:not(.nav-cta):hover { color: var(--black); opacity: 1; }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 900px; margin: 0 auto; padding: 16px 32px 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); }
+    .breadcrumb a:hover { color: var(--gold); opacity: 1; }
+    .breadcrumb span { opacity: .35; }
+
+    /* ARTICLE */
+    article { max-width: 900px; margin: 0 auto; padding: 32px 32px 32px; }
+
+    /* SECTION LABEL */
+    .section-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+
+    /* HERO */
+    .hero-eyebrow { font-family: Arial,sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
+    h1 { font-size: clamp(26px,4vw,40px); font-weight: 400; line-height: 1.2; color: var(--black); margin-bottom: 16px; letter-spacing: -.3px; }
+    .hero-subtitle { font-family: Arial,sans-serif; font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; max-width: 700px; }
+    .hero-byline { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .byline-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .byline-text { font-family: Arial,sans-serif; font-size: 14px; color: var(--gold); font-weight: 600; }
+
+    /* HERO IMAGE */
+    .img-hero { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; margin-bottom: 28px; background: #C8BEA8; }
+    .img-hero-wrap { position: relative; margin-bottom: 28px; }
+    .img-hero-wrap img { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; }
+    .img-caption { font-family: Arial,sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    /* FLOAT IMAGES */
+    .img-float { float: right; width: 42%; margin: 6px 0 24px 32px; }
+    .img-float.left { float: left; margin: 6px 32px 24px 0; }
+    .img-float img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .img-float .img-caption { margin-top: 6px; }
+    .clearfix::after { content: ""; display: table; clear: both; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--gold); opacity: 1; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--black); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 14px 32px; border: 2px solid var(--black); text-decoration: none; transition: all .2s; }
+    .btn-outline:hover { background: var(--black); color: var(--white); opacity: 1; }
+
+    /* HR */
+    hr { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+
+    /* BODY TEXT */
+    h2 { font-size: clamp(20px,2.8vw,28px); font-weight: 400; color: var(--black); margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-family: Arial,sans-serif; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 10px; margin-top: 28px; }
+    p { margin-bottom: 20px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box { background: var(--bg2); border-left: 4px solid var(--gold); padding: 24px 28px; margin: 32px 0; }
+    .highlight-box h3 { margin-top: 0; font-size: 17px; }
+    .highlight-box p { font-family: Arial,sans-serif; font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+
+    /* STECKBRIEF */
+    .steckbrief { background: var(--white); border: 1px solid var(--border); padding: 32px 36px; margin: 32px 0; }
+    .steckbrief-title { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .steckbrief table { width: 100%; border-collapse: collapse; }
+    .steckbrief td { font-family: Arial,sans-serif; font-size: 15px; padding: 9px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .steckbrief td:first-child { color: var(--muted); width: 42%; padding-right: 16px; }
+    .steckbrief td:last-child { color: var(--text); font-weight: 500; }
+    .steckbrief tr:last-child td { border-bottom: none; }
+
+    /* LEISTUNGEN */
+    .leistungen-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin: 24px 0; }
+    .leistung-item { background: var(--white); padding: 28px 24px; }
+    .leistung-item h3 { font-size: 15px; margin-top: 0; margin-bottom: 10px; }
+    .leistung-item p { font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .leistung-link { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* INTERVIEW */
+    .interview { background: var(--white); border: 1px solid var(--border); padding: 44px; }
+    .interview-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .expert-photo { width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0; overflow: hidden; background: #C8BEA8; }
+    .expert-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .expert-name { font-size: 19px; font-weight: 400; color: var(--black); margin-bottom: 3px; }
+    .expert-company { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .expert-city { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); opacity: .7; }
+
+    /* PULL QUOTE */
+    .pull-quote { border-left: 4px solid var(--gold); padding: 22px 28px; margin: 32px 0; background: #FBF9F4; }
+    .pull-quote-icon { font-size: 30px; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+    .pull-quote p { font-size: 19px; font-style: italic; color: var(--black); line-height: 1.5; margin-bottom: 12px; }
+    .pull-quote-author { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 48px; }
+    .gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: opacity .2s; }
+    .gallery-grid img:hover { opacity: .9; }
+
+    /* CONTACT BOX */
+    .contact-box { background: var(--black); padding: 48px; display: grid; grid-template-columns: 160px 1fr; gap: 44px; align-items: start; }
+    .contact-expert { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .contact-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(184,147,42,.35); background: #C8BEA8; }
+    .contact-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .contact-name { font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; color: var(--white); text-align: center; }
+    .contact-company { font-family: Arial,sans-serif; font-size: 12px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-city { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .stars { display: flex; gap: 2px; align-items: center; justify-content: center; }
+    .star { color: var(--gold); font-size: 13px; }
+    .rating-score { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); margin-left: 4px; }
+    .rating-label { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-content h3 { font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 14px; font-family: Georgia,serif; }
+    .contact-content p { font-family: Arial,sans-serif; font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.75; margin-bottom: 24px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--black); font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-gold:hover { background: var(--gold2); opacity: 1; }
+
+    /* SERVICE AREA */
+    .service-area { background: var(--bg2); border-top: 1px solid var(--border); padding: 18px 24px; margin: 32px 0 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); line-height: 1.7; display: flex; align-items: flex-start; gap: 8px; }
+    .service-area svg { flex-shrink: 0; margin-top: 2px; color: var(--muted); }
+    .service-area strong { color: var(--text); }
+
+    /* FOOTER */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--black); opacity: 1; }
+    .footer-note { font-family: Arial,sans-serif; font-size: 12px; color: #C0C0C0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      article { padding: 24px 20px 60px; }
+      .img-float, .img-float.left { float: none; width: 100%; margin: 0 0 24px 0; }
+      .leistungen-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+      .interview { padding: 28px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  .contact-box{margin:32px 0;}.btn-primary,.btn-gold,.btn-outline{padding:16px 34px !important;font-size:15px !important;}p:has(> a.btn-outline),p:has(> a.btn-primary){margin-top:32px !important;}.pull-quote-icon{font-size:72px !important;margin-bottom:8px !important;}
+</style>
+<link rel="icon" type="image/png" href="/favicon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Zimmerei Rhein-Main: Hochwertiger Holzbau und professionelle Dachsanierung","description":"Meisterhafte Zimmerei im Rhein-Main-Gebiet: Holzbau, Dachsanierung und Aufstockung mit 30 Jahren Erfahrung. Jetzt Qualität für Ihr Bauprojekt anfragen!","datePublished":"2026-09-03","dateModified":"2026-09-03","author":{"@type":"Person","name":"Alexander Bohn"},"publisher":{"@type":"Organization","name":"Holzbau Lokal","url":"https://holzbau-lokal.de/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://holzbau-lokal.de/bohn/zimmerei/rhein-main-region/"},"image":["https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/15181e209_Bohn_Lookbook_fotos_web-1073.jpg"]}</script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="88a9b7c5-dd37-4142-a946-5fadf0e0f93e" data-blockingmode="auto" type="text/javascript"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:44px;width:auto;display:block;"></a>
+  <div class="nav-links">
+    <a href="/bohn/kontakt/" class="nav-cta">Beratungstermin →</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="/">Holzbau Lokal</a>
+  <span>/</span>
+  <a href="/bohn/">Bohn</a>
+  <span>/</span>
+  <span style="color:var(--text);">Zimmerei Rhein-Main (Region)</span>
+</div>
+
+<article>
+
+  <!-- HERO -->
+  <header style="margin-bottom:44px;">
+    <div class="hero-eyebrow">Expertenbeitrag · Rhein-Main (Region)</div>
+    <h1>Zimmerei Rhein-Main: Hochwertiger Holzbau und professionelle Dachsanierung</h1>
+    <p class="hero-subtitle">Präzises Handwerk für anspruchsvolle Wohnraumerweiterungen und energetische Gebäudesanierungen im Herzen des Rhein-Main-Gebiets.</p>
+    <div class="hero-byline">
+      <a href="/bohn/" class="byline-text">Holzbau-Experte Alexander Bohn</a>
+    </div>
+    <div class="img-hero-wrap">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/15181e209_Bohn_Lookbook_fotos_web-1073.jpg" alt="Zimmerei Rhein-Main: Hochwertiger Holzbau und professionelle Dachsanierung" class="img-hero">
+      <p class="img-caption"></p>
+    </div>
+    <a href="/bohn/kontakt/" class="btn-primary">Beratungstermin vereinbaren →</a>
+  </header>
+
+  <hr>
+
+  <!-- SEKTION 1: IM BLICKPUNKT -->
+  <section>
+    <div class="section-label">Im Blickpunkt</div>
+    <h2>Handwerkliche Expertise in der Rhein-Main-Region</h2>
+    <div class="clearfix">
+      <div class="img-float">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/703de7c4e_Bohn_Lookbook_fotos_web-0944.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <p>Die Metropolregion Frankfurt am Main befindet sich inmitten einer baulichen Zeitenwende.  Während der Bedarf an modernem, effizientem Wohnraum in urbanen Zentren wie Bockenheim oder den angrenzenden Taunus-Kommunen kontinuierlich wächst, stoßen konventionelle Bauweisen bei der energetischen Sanierung oder vertikalen Nachverdichtung oft an ihre Grenzen.</p>
+<p>Genau hier setzt die spezialisierte Arbeit der Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co.  KG an.</p>
+<p>Als etablierte Zimmerei Rhein-Main liefert der Betrieb seit drei Jahrzehnten fachliche Expertise, die weit über das Standardhandwerk hinausgeht.  Die Kombination aus meisterlicher Zimmereikunst und fundierter Dachdeckerei ermöglicht es, komplexe Bestandsimmobilien nicht nur zu erhalten, sondern zukunftsfähig weiterzuentwickeln.</p>
+<p>Wenn es um die Herausforderungen der Nachverdichtung oder den Erhalt historischer Bausubstanz geht, zeigt sich die Relevanz einer fundierten handwerklichen Planung.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 2: DER LOKALE MARKT -->
+  <section>
+    <div class="section-label">Der lokale Markt</div>
+    <h2>Klimatische Anforderungen und urbaner Wohnraumdruck</h2>
+    <h2>Urbaner Druck und bauliche Entwicklung im Rhein-Main-Raum</h2>
+<p>Die Region Frankfurt am Main ist durch eine extreme Bodenknappheit gekennzeichnet, die Bauherren und Immobilienbesitzer gleichermaßen unter Druck setzt. Insbesondere in den dicht besiedelten Frankfurter Stadtteilen sowie in den gefragten Wohnlagen des Taunus-Vorlandes führt dies zu einem klaren Trend: Die Nachverdichtung nach oben. Wo kein Raum in die Breite vorhanden ist, wird das Dachgeschoss zur wertvollen Reservefläche.</p>
+<h3>Klimatische Anpassung und sommerlicher Wärmeschutz</h3>
+<p>Die klimatischen Bedingungen in der Rheinebene, geprägt durch heiße Sommer und zunehmend mildere Winter, stellen hohe Ansprüche an die Gebäudehülle. In Frankfurt-Bockenheim oder auch in den geschlossenen Siedlungsstrukturen von Bad Homburg führt die städtische Überwärmung dazu, dass Dächer im Sommer enorme solare Lasten aufnehmen. Eine zeitgemäße Sanierung muss daher zwingend den sommerlichen Wärmeschutz nach DIN 4108-2 berücksichtigen. Die Branche erkennt an, dass die <a href="https://www.holzbauoffensive.hessen.de">Holzbauoffensive Hessen</a> hierbei einen wichtigen Impuls gibt, indem sie nachhaltiges Bauen als zentralen Bestandteil der regionalen Strategie zur Bewältigung des Wohnraummangels definiert. Die Landesinitiative unterstreicht, dass Holzbau nicht nur ein ökologisches Statement darstellt, sondern durch seine hervorragende Wärmespeicherfähigkeit und Diffusionsfähigkeit aktiv zur Klimaresilienz der Städte beiträgt.</p>
+    
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 3: DIE HERAUSFORDERUNG -->
+  <section>
+    <div class="section-label">Die Herausforderung</div>
+    <h2>Fachgerechte Sanierungsstrategien und Holzrahmenbau</h2>
+    <div class="clearfix">
+      <div class="img-float left">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/32673b851_Bohn_Lookbook_fotos_web-0788.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <h2>Konstruktive Holzbau-Lösungen und Präzisionsfertigung</h2>
+<p>Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG begegnet diesen Herausforderungen durch eine proaktive Planung und eine hohe Fertigungstiefe in der eigenen Schreinerei. Die individuelle Anfertigung von Holzbauteilen ermöglicht es, auf die spezifischen Gegebenheiten jedes Objekts – ob denkmalgeschütztes Fachwerk oder Bestandsobjekt aus den 1960er-Jahren – punktgenau zu reagieren. Die Zimmerei Rhein-Main nutzt hierbei den Holzrahmenbau als Schlüsseltechnologie für Dachaufstockungen, da dieser eine massive Gewichtsersparnis bei gleichzeitig hoher Tragfähigkeit bietet.</p>
+<h3>Qualitätssicherung und gewerkübergreifende Koordination</h3>
+<p>Die Bauprozesse werden so strukturiert, dass sämtliche Gewerke nahtlos ineinandergreifen. Eine zentrale Rolle spielt dabei die Kommunikation mit Denkmalschutzbehörden sowie die frühzeitige Abstimmung mit Partnern, um eine reibungslose Projektabwicklung zu garantieren. Durch die fachgerechte energetische Dachsanierung gemäß aktueller Normvorgaben wird sichergestellt, dass nicht nur die Ästhetik überzeugt, sondern die physikalischen Kennwerte des Gebäudes nachhaltig optimiert werden. Dies umfasst den Einbau von Hochleistungsdämmstoffen, die unter sommerlichen Bedingungen den Hitzeschutz im Dachraum maßgeblich verbessern und so dem städtischen Wärmeinseleffekt effektiv entgegenwirken.</p>
+    </div>
+    <h3>Die Herausforderung der energetischen Sanierung</h3>
+<p>Im Frankfurter Stadtgebiet sowie im Speckgürtel der Region stellt insbesondere die energetische Sanierung von Altbauten ein komplexes Unterfangen dar. Oftmals korrespondieren historische Dachstühle nicht mit aktuellen Anforderungen des Gebäudeenergiegesetzes (GEG), das eine lückenlose und hochgradig diffusionsdichte Dämmung verlangt. Der Spagat zwischen Denkmalschutz und notwendiger Effizienzsteigerung erfordert eine präzise bauphysikalische Planung, die Wärmebrücken zuverlässig vermeidet.</p>
+<h3>Bauen unter urbanem Zeitdruck und statischer Belastung</h3>
+<p>Ein weiteres Problem stellt der akute Platzmangel dar. Viele Immobilienbesitzer sehen sich mit begrenzten Grundstücksflächen konfrontiert, was eine intelligente vertikale Erweiterung zur attraktiven Option macht. Dabei entstehen bei Aufstockungen in Holzrahmenbauweise besondere Anforderungen an die Statik des Bestandsgebäudes sowie an den Brandschutz, der in dicht bebauten urbanen Quartieren höchste Priorität genießt. Die Integration neuer Bauteile in bestehende Konstruktionen verlangt höchste Präzision, damit Wärmebrücken minimiert und die Bauphysik des Gesamtgebäudes nicht negativ beeinflusst wird. Ohne eine exakte Abstimmung mit angrenzenden Gewerken wie Spenglern oder Trockenbauern drohen Schnittstellenprobleme, die sich als zeitliche Verzögerungen oder spätere Feuchtigkeitsschäden manifestieren können.</p>
+    <p style="margin-top:32px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 5: EXPERTEN-INTERVIEW -->
+  <section>
+    <div class="section-label">Der Experten-Hinweis</div>
+    <div class="interview">
+      <div class="interview-header">
+        <div class="expert-photo">
+          <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn">
+        </div>
+        <div>
+          <div class="expert-name">Alexander Bohn</div>
+          <div class="expert-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+          <div class="expert-city">Rhein-Main (Region)</div>
+        </div>
+      </div>
+      <p>Wenn ich einen alten Dachstuhl begutachte, schaue ich mir zuerst die Knotenpunkte und die Balkenauflager an.  Ich sehe dort oft die Spuren von jahrzehntelanger Feuchtigkeit und prüfe mit meinem Hammer, wie tief ich in die Substanz eindringe.</p>
+<p>Mein Augenmerk lege ich bei der Planung einer Sanierung darauf, dass ich die traditionelle Handwerkskunst mit den modernen Dämmstandards verbinde, denn ich weiß aus meiner täglichen Arbeit, dass ein Dach nicht nur dicht sein muss, sondern atmen muss.  Ich verlasse mich bei jedem Anbau und jeder Aufstockung auf meine eigene Erfahrung in der Werkstatt, da ich die Holzelemente dort selbst in der Hand halte.</p>
+<p>Wenn ich sehe, wie präzise meine Mitarbeiter eine Holzrahmenkonstruktion an ein bestehendes Gebäude anschließen, weiß ich, dass diese Sorgfalt die einzige Möglichkeit ist, um dauerhafte Qualität zu liefern.</p>
+      <div class="pull-quote">
+        <div class="pull-quote-icon">„</div>
+        <p>Wenn ich einen alten Dachstuhl begutachte, schaue ich mir zuerst die Knotenpunkte und die Balkenauflager an. Ich sehe dort oft die Spuren von jahrzehntelanger Feuchtigkeit und prüfe mit meinem Hammer, wie tief ich in die Substanz eindringe.</p>
+        <div class="pull-quote-author">— Alexander Bohn</div>
+      </div>
+      <a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 6: REGIONALE PROJEKTE -->
+  <section>
+    <div class="section-label">Regionale Projekte</div>
+    <h2>Realisierte Bauprojekte im Frankfurter Umland</h2>
+    <p>Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG hat in den letzten Jahren zahlreiche Projekte realisiert, die den hohen Anspruch an Qualität und architektonische Integrität widerspiegeln. In Bockenheim wurde beispielsweise eine komplexe Aufstockung durchgeführt, bei der ein historisches Gebäude zusätzlichen Wohnraum durch den Holzrahmenbau erhielt, ohne die charakteristische Fassadengestaltung zu beeinträchtigen. [Bildunterschrift: Detailaufnahme einer fachgerechten Aufstockung in Bockenheim nach statischer Ertüchtigung].</p>
+<p>Auch in Bad Homburg konnte ein umfangreicher Anbau realisiert werden, der durch die nahtlose Verbindung von Alt- und Neubau besticht. [Bildunterschrift: Nahtloser Übergang zwischen historischem Mauerwerk und moderner Holzrahmen-Erweiterung in Bad Homburg]. In Kronberg lag der Fokus bei einem Holzrahmenbau-Projekt auf der exakten statischen Abstimmung mit der vorgegebenen Grundstücksgeometrie. Bei allen Vorhaben im Raum Rhein-Main zeigt sich, dass eine detaillierte Planung der Baustellenlogistik und die Einhaltung präziser Zeitpläne das Fundament für die Kundenzufriedenheit bilden. Die Kombination aus meisterlichem Gebälk-Check und moderner Dämmtechnik sorgt dafür, dass die realisierten Objekte den heutigen Ansprüchen an Wohnkomfort und Energieeffizienz vollumfänglich entsprechen.</p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 7: PARTNER VOR ORT -->
+  <section>
+    <div class="section-label">Partner vor Ort</div>
+    <h2>Qualitätsstandards und Zertifizierte Kompetenz</h2>
+    <h3>Geprüfte Standards und technische Expertise</h3>
+<p>Qualität im Holzbau wird durch nachvollziehbare Zertifizierungen und gelebte Standards definiert. Als Meisterbetrieb steht das Unternehmen für eine fachliche Sorgfalt, die durch das RAL Gütezeichen Holzschaffen untermauert wird. Die Verwendung von FSC-zertifizierten Hölzern unterstreicht den verantwortungsvollen Umgang mit Ressourcen.</p>
+<p>| Kategorie | Detailangabe |</p>
+<p>| :--- | :--- |</p>
+<p>| Betrieb | Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG |</p>
+<p>| Erfahrung | 30 Jahre als Meisterbetrieb |</p>
+<p>| Einzugsgebiet | Frankfurt am Main &amp; Rhein-Main-Region |</p>
+<p>| Qualitätszeichen | RAL Gütezeichen Holzschaffen, FSC-zertifiziert |</p>
+<p>| Kernkompetenzen | Holzrahmenbau, Dachsanierung, Aufstockung |</p>
+<p>Die Fachberatung stützt sich auf die Expertise renommierter Fachverbände. Wie Holzbau Deutschland in seinen Leitlinien zur Qualitätssicherung ausführt, <a href="https://www.holzbau-deutschland.de">finden Bauherren unter diesem Link</a> wichtige Orientierungshilfen zu technischen Normen und ökologischen Standards.</p>
+    <div class="steckbrief">
+      <div class="steckbrief-title">Steckbrief zur Expertise</div>
+      <table>
+        <tr><td>Firma</td><td>Bohn Holzbau & Dachdeckerei GmbH & Co. KG</td></tr>
+        <tr><td>Inhaber</td><td>Alexander Bohn</td></tr>
+        <tr><td>Region</td><td>Frankfurt am Main</td></tr>
+        <tr><td>Zertifikate</td><td>Meisterbetrieb, RAL Gütezeichen Holzschaffen, FSC-zertifiziert</td></tr>
+        <tr><td>Fokus</td><td>Wohnraumerweiterung bei Bestandsimmobilien</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 8: LEISTUNGSBEREICHE -->
+  <section>
+    <div class="section-label">Leistungsbereiche</div>
+    <h2>Leistungsprofil für Holzbau und Dachsanierung</h2>
+    <div class="section-text"><h3>Konstruktiver Holzbau und fachgerechte Dachdeckerei</h3>
+<p>Das Leistungsspektrum umfasst alle Facetten der modernen Zimmerei. Der Kernbereich konzentriert sich auf die individuelle Lösung von baulichen Fragestellungen im Bestand.</p>
+<h3>Dachsanierung und Dachstuhlarbeiten</h3>
+<p>Die fachmännische Sanierung von Dächern schließt den Austausch maroder Balken, die fachgerechte Dämmung sowie die Neueindeckung mit ein. Dabei wird besonderer Wert auf die Einhaltung der geltenden energetischen Vorgaben gelegt, um langfristige Einsparungen bei den Energiekosten zu realisieren.</p>
+<h3>Holzrahmenbau und individuelle Anbauten</h3>
+<p>Durch den Holzrahmenbau schafft der Betrieb maßgeschneiderten Wohnraum. Diese Bauweise bietet hohe Flexibilität bei der Grundrissgestaltung und ist ideal für Wohnraumerweiterungen geeignet. Von der Planung bis zur Montage erfolgen alle Schritte mit höchster handwerklicher Präzision.</p>
+<h3>Schreinerei für individuelle Bauteile</h3>
+<p>Die eigene Schreinerei ermöglicht es, Sonderlösungen für Balkone, Terrassenüberdachungen oder spezielle Sichtschutzelemente passgenau anzufertigen. Die Individualität der Kundenwünsche wird so direkt in handwerkliche Realität übersetzt, was eine nahtlose Integration in das bestehende architektonische Umfeld garantiert.</p></div>
+    <p style="margin-top:8px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- GALERIE -->
+  <section>
+    <div class="section-label">Eindrücke aus der Praxis</div>
+    <div class="gallery-grid">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/32673b851_Bohn_Lookbook_fotos_web-0788.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/c56ba7f26_Bohn_Lookbook_fotos_web-0967.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/c56dd5642_Bohn_Lookbook_fotos_web-1047.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/587152704_Bohn_Lookbook_fotos_web-1009.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- KONTAKTBOX -->
+  <section id="kontakt">
+    <div class="contact-box">
+      <div class="contact-expert">
+        <div class="contact-photo"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn"></div>
+        <div class="contact-name">Alexander Bohn</div>
+        <div class="contact-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+        <div class="contact-city">Rhein-Main (Region)</div>
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+          <span class="rating-score">5.0</span>
+        </div>
+        <div class="rating-label">Google Bewertungen</div>
+      </div>
+      <div class="contact-content">
+        <h3>Jetzt Erstberatung vereinbaren</h3>
+        <p>Eine solide Bausubstanz ist die wertvollste Investition in die Zukunft.  Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co.
+KG vereint 30 Jahre Erfahrung mit handwerklicher Präzision, um auch anspruchsvolle Projekte im Rhein-Main-Gebiet zur vollen Zufriedenheit umzusetzen.  Ob energetische Dachsanierung oder durchdachte Aufstockung — die fachliche Expertise sorgt für dauerhafte Ergebnisse.
+Jetzt die Erstberatung für das Holzbau-Projekt im Rhein-Main-Gebiet anfragen und von fundierter Planungskompetenz profitieren.</p>
+        <a href="/bohn/kontakt/" class="btn-gold">Jetzt Kontakt aufnehmen →</a>
+      </div>
+    </div>
+  </section>
+
+<!-- SERVICE AREA -->
+<div class="service-area">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <span><strong>Expertise und Leistungen verfügbar in:</strong> Oberursel · Taunusstein · Frankfurt am Main · Rhein-Main (Region) · Wiesbaden · Taunus · Offenbach · Darmstadt · Bad Homburg · Hanau</span>
+</div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:30px;width:auto;display:block;opacity:.85;"></a>
+  <div class="footer-note">© 2026 Holzbau Lokal — Ein Projekt von Lokale Marktmacht</div>
+  <div class="footer-links">
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://www.holzbau-lokal.de/#kontakt">Holzbau-Experte</a>
+  </div>
+</footer>
+
+</body>
+</html>
