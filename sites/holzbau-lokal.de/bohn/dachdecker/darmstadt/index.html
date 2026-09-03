@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dachdecker in Darmstadt | Bohn Holzbau & Dachdeckerei | Holzbau Lokal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #141414; --gold: #C9A43A; --gold2: #DFB84E;
+      --bg: #FAFAF7; --bg2: #F0EFE9; --border: #E2E0D8;
+      --text: #242424; --muted: #6B6B6B; --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Georgia, serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.8; }
+    a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .75; }
+
+    /* NAV */
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+    .nav-cta { color: var(--white) !important; background: var(--black); padding: 10px 20px; font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+    .nav-cta:hover { background: var(--gold); opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.nav-cta) { font-family: Arial,sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .nav-links a:not(.nav-cta):hover { color: var(--black); opacity: 1; }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 900px; margin: 0 auto; padding: 16px 32px 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--muted); }
+    .breadcrumb a:hover { color: var(--gold); opacity: 1; }
+    .breadcrumb span { opacity: .35; }
+
+    /* ARTICLE */
+    article { max-width: 900px; margin: 0 auto; padding: 32px 32px 32px; }
+
+    /* SECTION LABEL */
+    .section-label { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+
+    /* HERO */
+    .hero-eyebrow { font-family: Arial,sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--gold); display: block; }
+    h1 { font-size: clamp(26px,4vw,40px); font-weight: 400; line-height: 1.2; color: var(--black); margin-bottom: 16px; letter-spacing: -.3px; }
+    .hero-subtitle { font-family: Arial,sans-serif; font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; max-width: 700px; }
+    .hero-byline { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .byline-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .byline-text { font-family: Arial,sans-serif; font-size: 14px; color: var(--gold); font-weight: 600; }
+
+    /* HERO IMAGE */
+    .img-hero { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; margin-bottom: 28px; background: #C8BEA8; }
+    .img-hero-wrap { position: relative; margin-bottom: 28px; }
+    .img-hero-wrap img { width: 100%; aspect-ratio: 16/7; object-fit: cover; display: block; }
+    .img-caption { font-family: Arial,sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    /* FLOAT IMAGES */
+    .img-float { float: right; width: 42%; margin: 6px 0 24px 32px; }
+    .img-float.left { float: left; margin: 6px 32px 24px 0; }
+    .img-float img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .img-float .img-caption { margin-top: 6px; }
+    .clearfix::after { content: ""; display: table; clear: both; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: var(--gold); opacity: 1; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--black); font-family: Arial,sans-serif; font-size: 15px; font-weight: 700; padding: 14px 32px; border: 2px solid var(--black); text-decoration: none; transition: all .2s; }
+    .btn-outline:hover { background: var(--black); color: var(--white); opacity: 1; }
+
+    /* HR */
+    hr { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+
+    /* BODY TEXT */
+    h2 { font-size: clamp(20px,2.8vw,28px); font-weight: 400; color: var(--black); margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-family: Arial,sans-serif; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 10px; margin-top: 28px; }
+    p { margin-bottom: 20px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box { background: var(--bg2); border-left: 4px solid var(--gold); padding: 24px 28px; margin: 32px 0; }
+    .highlight-box h3 { margin-top: 0; font-size: 17px; }
+    .highlight-box p { font-family: Arial,sans-serif; font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+
+    /* STECKBRIEF */
+    .steckbrief { background: var(--white); border: 1px solid var(--border); padding: 32px 36px; margin: 32px 0; }
+    .steckbrief-title { font-family: Arial,sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .steckbrief table { width: 100%; border-collapse: collapse; }
+    .steckbrief td { font-family: Arial,sans-serif; font-size: 15px; padding: 9px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .steckbrief td:first-child { color: var(--muted); width: 42%; padding-right: 16px; }
+    .steckbrief td:last-child { color: var(--text); font-weight: 500; }
+    .steckbrief tr:last-child td { border-bottom: none; }
+
+    /* LEISTUNGEN */
+    .leistungen-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin: 24px 0; }
+    .leistung-item { background: var(--white); padding: 28px 24px; }
+    .leistung-item h3 { font-size: 15px; margin-top: 0; margin-bottom: 10px; }
+    .leistung-item p { font-family: Arial,sans-serif; font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .leistung-link { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* INTERVIEW */
+    .interview { background: var(--white); border: 1px solid var(--border); padding: 44px; }
+    .interview-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .expert-photo { width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0; overflow: hidden; background: #C8BEA8; }
+    .expert-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .expert-name { font-size: 19px; font-weight: 400; color: var(--black); margin-bottom: 3px; }
+    .expert-company { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .expert-city { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); opacity: .7; }
+
+    /* PULL QUOTE */
+    .pull-quote { border-left: 4px solid var(--gold); padding: 22px 28px; margin: 32px 0; background: #FBF9F4; }
+    .pull-quote-icon { font-size: 30px; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+    .pull-quote p { font-size: 19px; font-style: italic; color: var(--black); line-height: 1.5; margin-bottom: 12px; }
+    .pull-quote-author { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 48px; }
+    .gallery-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: opacity .2s; }
+    .gallery-grid img:hover { opacity: .9; }
+
+    /* CONTACT BOX */
+    .contact-box { background: var(--black); padding: 48px; display: grid; grid-template-columns: 160px 1fr; gap: 44px; align-items: start; }
+    .contact-expert { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .contact-photo { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(184,147,42,.35); background: #C8BEA8; }
+    .contact-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .contact-name { font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; color: var(--white); text-align: center; }
+    .contact-company { font-family: Arial,sans-serif; font-size: 12px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-city { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .stars { display: flex; gap: 2px; align-items: center; justify-content: center; }
+    .star { color: var(--gold); font-size: 13px; }
+    .rating-score { font-family: Arial,sans-serif; font-size: 13px; color: var(--gold); margin-left: 4px; }
+    .rating-label { font-family: Arial,sans-serif; font-size: 13px; color: rgba(255,255,255,.70); text-align: center; }
+    .contact-content h3 { font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 14px; font-family: Georgia,serif; }
+    .contact-content p { font-family: Arial,sans-serif; font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.75; margin-bottom: 24px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--black); font-family: Arial,sans-serif; font-size: 14px; font-weight: 700; padding: 15px 32px; text-decoration: none; transition: background .2s; }
+    .btn-gold:hover { background: var(--gold2); opacity: 1; }
+
+    /* SERVICE AREA */
+    .service-area { background: var(--bg2); border-top: 1px solid var(--border); padding: 18px 24px; margin: 32px 0 0; font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); line-height: 1.7; display: flex; align-items: flex-start; gap: 8px; }
+    .service-area svg { flex-shrink: 0; margin-top: 2px; color: var(--muted); }
+    .service-area strong { color: var(--text); }
+
+    /* FOOTER */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-family: Arial,sans-serif; font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--black); opacity: 1; }
+    .footer-note { font-family: Arial,sans-serif; font-size: 12px; color: #C0C0C0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      article { padding: 24px 20px 60px; }
+      .img-float, .img-float.left { float: none; width: 100%; margin: 0 0 24px 0; }
+      .leistungen-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+      .interview { padding: 28px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  .contact-box{margin:32px 0;}.btn-primary,.btn-gold,.btn-outline{padding:16px 34px !important;font-size:15px !important;}p:has(> a.btn-outline),p:has(> a.btn-primary){margin-top:32px !important;}.pull-quote-icon{font-size:72px !important;margin-bottom:8px !important;}
+</style>
+<link rel="icon" type="image/png" href="/favicon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Dachdecker Darmstadt: Energetische Sanierung auf Experten-Niveau","description":"Ihr Dachdecker in Darmstadt: Energetische Sanierung, Dachstuhl & Holzbau vom erfahrenen Meisterbetrieb. Jetzt für Ihr Sanierungsprojekt anfragen!","datePublished":"2026-09-03","dateModified":"2026-09-03","author":{"@type":"Person","name":"Alexander Bohn"},"publisher":{"@type":"Organization","name":"Holzbau Lokal","url":"https://holzbau-lokal.de/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://holzbau-lokal.de/bohn/dachdecker/darmstadt/"},"image":["https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/d22189ec7_Bohn_Lookbook_fotos_web-1096.jpg"]}</script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="88a9b7c5-dd37-4142-a946-5fadf0e0f93e" data-blockingmode="auto" type="text/javascript"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:44px;width:auto;display:block;"></a>
+  <div class="nav-links">
+    <a href="/bohn/kontakt/" class="nav-cta">Beratungstermin →</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="/">Holzbau Lokal</a>
+  <span>/</span>
+  <a href="/bohn/">Bohn</a>
+  <span>/</span>
+  <span style="color:var(--text);">Dachdecker Darmstadt</span>
+</div>
+
+<article>
+
+  <!-- HERO -->
+  <header style="margin-bottom:44px;">
+    <div class="hero-eyebrow">Expertenbeitrag · Darmstadt</div>
+    <h1>Dachdecker Darmstadt: Energetische Sanierung auf Experten-Niveau</h1>
+    <p class="hero-subtitle">Präzises Handwerk für zukunftssichere Wohnraumerweiterungen und nachhaltige Dacheindeckungen im Darmstädter Stadtgebiet.</p>
+    <div class="hero-byline">
+      <a href="/bohn/" class="byline-text">Holzbau-Experte Alexander Bohn</a>
+    </div>
+    <div class="img-hero-wrap">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/d22189ec7_Bohn_Lookbook_fotos_web-1096.jpg" alt="Dachdecker Darmstadt: Energetische Sanierung auf Experten-Niveau" class="img-hero">
+      <p class="img-caption"></p>
+    </div>
+    <a href="/bohn/kontakt/" class="btn-primary">Beratungstermin vereinbaren →</a>
+  </header>
+
+  <hr>
+
+  <!-- SEKTION 1: IM BLICKPUNKT -->
+  <section>
+    <div class="section-label">Im Blickpunkt</div>
+    <h2>Handwerkliche Expertise für Darmstadts Dächer</h2>
+    <div class="clearfix">
+      <div class="img-float">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/2aae0e727_Bohn_Lookbook_fotos_web-1050.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <p>In Darmstadt wandelt sich das Stadtbild stetig.  Die Wissenschaftsstadt strebt mit ambitionierten Projekten die Klimaneutralität bis 2035 an, was Immobilieneigentümer vor neue Herausforderungen stellt.</p>
+<p>Ein fachgerecht ausgeführtes Dach dient dabei nicht nur als Schutzschild gegen Witterung, sondern bildet die thermische Basis für ein effizientes Gebäude.  Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co.</p>
+<p>KG widmet sich der anspruchsvollen Aufgabe, Bestandsimmobilien durch eine hochwertige energetische Sanierung und präzise Dachdeckerarbeiten für die Zukunft zu rüsten.  Die Kombination aus traditionellem Zimmermannshandwerk und moderner Technologie sorgt dafür, dass energetische Schwachstellen bei Altbauten eliminiert werden.</p>
+<p>Als Dachdecker in Darmstadt agiert der Betrieb dort, wo historische Bausubstanz auf moderne energetische Anforderungen trifft.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 2: DER LOKALE MARKT -->
+  <section>
+    <div class="section-label">Der lokale Markt</div>
+    <h2>Darmstadts Weg zur Klimaneutralität und die Herausforderungen der Nachverdichtung</h2>
+    <h2>Klimawandel und Nachverdichtung in der Wissenschaftsstadt</h2>
+<h3>Fallstudie: Sanierung im Martinsviertel</h3>
+<p>In den historischen Straßenzügen des Martinsviertels zeigt sich exemplarisch, wie sensible Altbausanierung funktioniert. Hier wurden bei einem Gründerzeit-Objekt die statischen Anforderungen an die Dachdämmung mit den denkmalpflegerischen Vorgaben in Einklang gebracht. Durch eine passgenaue Aufsparrendämmung konnte die thermische Hülle verbessert werden, ohne die charakteristische Dachgeometrie zu verfälschen.</p>
+<h3>Thermische Belastungen und Anpassungsstrategien</h3>
+<p>Das Darmstädter Stadtgebiet ist von einem spürbaren Wärmeinseleffekt betroffen. In dicht bebauten Quartieren heizt sich die Umgebung im Sommer massiv auf. Hier leistet eine professionelle Dachsanierung mit einer effizienten Dämmung einen essenziellen Beitrag zur Reduzierung der sommerlichen Überwärmung im Dachgeschoss. Durch den gezielten Einsatz von diffusionsoffenen Systemen bleibt der Wohnraum klimagerecht nutzbar, was die Lebensqualität in der Stadt signifikant verbessert.</p>
+    
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 3: DIE HERAUSFORDERUNG -->
+  <section>
+    <div class="section-label">Die Herausforderung</div>
+    <h2>Integrierte Sanierungskonzepte zwischen Holzbau und Dachdeckung</h2>
+    <div class="clearfix">
+      <div class="img-float left">
+        <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/9a5d579e6_Bohn_Lookbook_fotos_web-0954.jpg" alt="">
+        <p class="img-caption"></p>
+      </div>
+      <h3>Ganzheitliche Konzepte im Holzbau</h3>
+<p>Die Lösung liegt in einer gewerkeübergreifenden Herangehensweise. Anstatt Dachdecker- und Zimmererarbeiten isoliert zu betrachten, bündelt die Bohn Holzbau &amp; Dachdeckerei diese Kompetenzen. Dieser integrale Ansatz sichert eine luftdichte Gebäudehülle, die nach dem Gebäudeenergiegesetz (GEG) zertifiziert ist. Durch den Einsatz ökologischer Dämmstoffe und moderner Eindeckmaterialien entstehen Dachlösungen, die sowohl den Brandschutzanforderungen genügen als auch eine hohe Langlebigkeit garantieren.</p>
+<h3>Präzision bei der Dacherneuerung</h3>
+<p>Bei einer Neueindeckung kommt es auf jedes Detail an: Die fachgerechte Verlegung der Unterspannbahn, die hinterlüftete Dacheindeckung sowie der exakte Anschluss an Gauben und Dachfenster. Die Arbeit an historischen Gebäuden verlangt zudem ein Gespür für die bauphysikalischen Besonderheiten, etwa die Diffusionsfähigkeit von Konstruktionen. Eine Dachsanierung in Bad Homburg zeigt beispielsweise, wie die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG komplexe Dachgeometrien durch passgenaue Holzbau-Lösungen technisch sicher löst.</p>
+<h3>Die Rolle der offiziellen Richtlinien</h3>
+<p>Für eine rechtssichere Planung orientiert sich der Betrieb an den Standards des Zentralverbandes des Deutschen Dachdeckerhandwerks (ZVDH). Wie der ZVDH in seinem Fachbereich für Dachtechnik erläutert, sind die technischen Regeln für Dachdeckungen mit unregelmäßigen Formaten oder bei speziellen Dachneigungen zwingend einzuhalten, um die Gewährleistung und den Versicherungsschutz für den Bauherrn dauerhaft zu sichern.</p>
+    </div>
+    <h3>Die energetische Lücke im Darmstädter Bestand</h3>
+<p>Viele Wohngebäude in Darmstadt stammen aus Jahrzehnten, in denen energetische Standards eine untergeordnete Rolle spielten. Eine mangelhafte Dämmung im Dachbereich führt in der kalten Jahreszeit zu erheblichen Wärmeverlusten, während die Räume im Sommer durch mangelnden sommerlichen Wärmeschutz schnell überhitzen. Diese Diskrepanz zwischen Wohnkomfort und Energiebedarf belastet Eigentümer zunehmend.</p>
+<h3>Statische Herausforderungen bei der Sanierung</h3>
+<p>Die Sanierung erfordert ein tiefgreifendes Verständnis für die vorhandene Statik. Oft müssen veraltete Dachstühle an heutige Lastanforderungen angepasst werden, besonders wenn eine Aufstockung oder der Einbau schwerer Dämmelemente geplant ist. Ein Dachausbau in Frankfurt erfordert ebenso wie in Darmstadt eine präzise Begutachtung der Balkenlage, um die strukturelle Integrität des Gebäudes langfristig zu gewährleisten. Ohne eine fundierte statische Planung riskieren Eigentümer teure Folgeschäden, die eine fachgerechte Holzbauweise von Beginn an ausschließen muss.</p>
+    <p style="margin-top:32px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 5: EXPERTEN-INTERVIEW -->
+  <section>
+    <div class="section-label">Der Experten-Hinweis</div>
+    <div class="interview">
+      <div class="interview-header">
+        <div class="expert-photo">
+          <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn">
+        </div>
+        <div>
+          <div class="expert-name">Alexander Bohn</div>
+          <div class="expert-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+          <div class="expert-city">Darmstadt</div>
+        </div>
+      </div>
+      <p>„Wenn ich auf ein Dach steige, betrachte ich nicht nur die Ziegel, sondern ich sehe die gesamte Konstruktion als ein lebendiges System.  Ich prüfe den Zustand der Sparren, ich beurteile die Anschlüsse an den Kaminen und ich spüre sofort, ob das Holz über die Jahre gearbeitet hat oder ob die Feuchtigkeit bereits ihr Werk vollbracht hat.</p>
+<p>Ich lege mein gesamtes Augenmerk auf eine dauerhafte Abdichtung, denn ich weiß, dass kleine Fehler bei der Detailausbildung – etwa an der Traufe oder im Bereich der Dachfenster – später große Probleme im Innenraum verursachen.  Wenn ich einen neuen Dachstuhl plane, berechne ich die statischen Reserven genau, damit mein Zimmermannsteam die Aufstockung ohne Kompromisse umsetzen kann.</p>
+<p>Ich achte bei jedem meiner Projekte darauf, dass die Materialien für die jeweilige Dachneigung und die lokale Windlast in Darmstadt perfekt gewählt sind, denn ich übernehme die Verantwortung für das, was ich oben verbaue.  “</p>
+      <div class="pull-quote">
+        <div class="pull-quote-icon">„</div>
+        <p>„Wenn ich auf ein Dach steige, betrachte ich nicht nur die Ziegel, sondern ich sehe die gesamte Konstruktion als ein lebendiges System. Ich prüfe den Zustand der Sparren, ich beurteile die Anschlüsse an den Kaminen und ich spüre sofort, ob das Holz über die Jahre gearbeitet hat oder ob die Feuchtigkeit bereits ihr Werk vollbracht hat.</p>
+        <div class="pull-quote-author">— Alexander Bohn</div>
+      </div>
+      <a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 6: REGIONALE PROJEKTE -->
+  <section>
+    <div class="section-label">Regionale Projekte</div>
+    <h2>Projektbeispiele für präzisen Holzbau und langfristige Dachlösungen</h2>
+    <p>Die Referenzprojekte der Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co.  KG spiegeln die Vielfalt der baulichen Anforderungen wider.</p>
+<p>Bei der Sanierung denkmalgeschützter Objekte in Darmstadt-Bessungen kam es auf die Kombination aus traditioneller Handwerkskunst und modernen energetischen Standards an.  So konnten durch den Einsatz historischer Ziegeltypen in Verbindung mit einer hochmodernen Zwischen- und Aufsparrendämmung historische Gebäude zukunftsfähig gemacht werden.</p>
+<p>Ein weiteres Feld ist die Wohnraumerweiterung durch den Holzrahmenbau.  Durch die Vorfertigung im eigenen Werk lassen sich Bauzeiten auf der Baustelle extrem verkürzen, was die Belastung für Anwohner minimiert.</p>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 7: PARTNER VOR ORT -->
+  <section>
+    <div class="section-label">Partner vor Ort</div>
+    <h2>Qualitätsstandards, Zertifikate und regionale Förderung</h2>
+    <h3>Geprüfte Qualität und Dokumentation</h3>
+<p>Die Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG steht für einen dokumentierten Qualitätsanspruch. Durch die Meisterqualifikation als Zimmermann und Dachdeckermeister wird sichergestellt, dass sämtliche Arbeiten den geltenden Fachregeln entsprechen. Die Zertifizierungen gemäß RAL Gütezeichen Holzschaffen sowie der FSC-Standard unterstreichen das Engagement für ökologische Verantwortung.</p>
+<h3>Eckdaten und Betriebsprofil</h3>
+<p>| Kategorie | Detail |</p>
+<p>| :--- | :--- |</p>
+<p>| Unternehmen | Bohn Holzbau &amp; Dachdeckerei GmbH &amp; Co. KG |</p>
+<p>| Firmensitz | Frankfurt am Main |</p>
+<p>| Expertise | Dachdeckermeister &amp; Zimmermann |</p>
+<p>| Kernleistungen | energetische Dachsanierung, Wohnraumerweiterung |</p>
+<p>| Zertifizierung | RAL, FSC, Meisterbetrieb |</p>
+<h3>Unterstützung durch regionale Programme</h3>
+<p>Für Eigentümer in Darmstadt ist die energetische Sanierung besonders durch die städtischen Förderprogramme attraktiv. Die Stadt unterstützt aktiv Maßnahmen zur Verbesserung der Energieeffizienz, was in Kombination mit den fachgerechten Leistungen eine wirtschaftliche Aufwertung der Immobilie darstellt.</p>
+    <div class="steckbrief">
+      <div class="steckbrief-title">Steckbrief zur Expertise</div>
+      <table>
+        <tr><td>Firma</td><td>Bohn Holzbau & Dachdeckerei GmbH & Co. KG</td></tr>
+        <tr><td>Inhaber</td><td>Alexander Bohn</td></tr>
+        <tr><td>Region</td><td>Frankfurt am Main</td></tr>
+        <tr><td>Zertifikate</td><td>Meisterbetrieb, RAL Gütezeichen Holzschaffen, FSC-zertifiziert</td></tr>
+        <tr><td>Fokus</td><td>Wohnraumerweiterung bei Bestandsimmobilien</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SEKTION 8: LEISTUNGSBEREICHE -->
+  <section>
+    <div class="section-label">Leistungsbereiche</div>
+    <h2>Dachdecker- und Zimmererdienstleistungen aus einer Hand</h2>
+    <div class="section-text"><h3>Energetische Dachsanierung und Dämmung</h3>
+<p>Die fachgerechte energetische Sanierung bildet das Fundament für die Senkung der Betriebskosten und die Erhöhung der Wohnqualität. Der Betrieb führt Dachsanierungen in Frankfurt und Darmstadt durch, bei denen die Dämmstandards des GEG durch hochwertige Aufsparrendämmungen oder ökologische Einblasdämmungen präzise eingehalten werden.</p>
+<h3>Zimmererarbeiten und Dachstuhlbau</h3>
+<p>Als spezialisierter Meisterbetrieb übernimmt das Unternehmen sämtliche Arbeiten am Dachstuhl. Vom Austausch maroder Hölzer bis zur Errichtung von Dachgauben bietet der Betrieb maßgeschneiderte Lösungen. Diese Zimmererarbeiten gehen Hand in Hand mit den anschließenden Dachdeckerarbeiten, was einen nahtlosen Ablauf garantiert.</p>
+<h3>Dachdeckerarbeiten und Neueindeckung</h3>
+<p>Eine langlebige Neueindeckung erfordert nicht nur die Auswahl hochwertiger Materialien, sondern eine exakte handwerkliche Umsetzung. Der Fokus liegt auf der Sturmsicherheit und Dichtigkeit. Durch die Anbindung an den Holzbau erfolgt eine ganzheitliche Betrachtung, die auch komplexe Anschlüsse an Solaranlagen mit einschließt.</p></div>
+    <p style="margin-top:8px;"><a href="/bohn/kontakt/" class="btn-outline">Jetzt unverbindlich anfragen →</a></p>
+  </section>
+
+  <hr>
+
+  <!-- GALERIE -->
+  <section>
+    <div class="section-label">Eindrücke aus der Praxis</div>
+    <div class="gallery-grid">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/9a5d579e6_Bohn_Lookbook_fotos_web-0954.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/f1c0ee868_Bohn_Lookbook_fotos_web-1045.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/69834c09a_Bohn_Lookbook_fotos_web-1092.jpg" alt="">
+      <img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/213258ca9_Bohn_Lookbook_fotos_web-1080.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- KONTAKTBOX -->
+  <section id="kontakt">
+    <div class="contact-box">
+      <div class="contact-expert">
+        <div class="contact-photo"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/1ed9f636e_Bildschirmfoto2026-08-10um124446.png" alt="Alexander Bohn"></div>
+        <div class="contact-name">Alexander Bohn</div>
+        <div class="contact-company">Bohn Holzbau & Dachdeckerei GmbH & Co. KG</div>
+        <div class="contact-city">Darmstadt</div>
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+          <span class="rating-score">5.0</span>
+        </div>
+        <div class="rating-label">Google Bewertungen</div>
+      </div>
+      <div class="contact-content">
+        <h3>Jetzt Erstberatung für ein Dachprojekt in Darmstadt anfragen</h3>
+        <p>Die Investition in eine zukunftssichere Dachlösung stellt die effektivste Maßnahme zur Steigerung des Gebäudewertes und zur Senkung der Energiekosten in Darmstadt dar.  Mit der langjährigen Erfahrung als Dachdecker und Zimmerer erhalten Eigentümer eine fundierte, handwerklich präzise Ausführung aus einer Hand.
+Von der ersten energetischen Analyse bis zum finalen Ziegel sichert der Betrieb eine transparente und verlässliche Umsetzung zu.</p>
+        <a href="/bohn/kontakt/" class="btn-gold">Jetzt Kontakt aufnehmen →</a>
+      </div>
+    </div>
+  </section>
+
+<!-- SERVICE AREA -->
+<div class="service-area">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <span><strong>Expertise und Leistungen verfügbar in:</strong> Oberursel · Taunusstein · Frankfurt am Main · Rhein-Main (Region) · Wiesbaden · Taunus · Offenbach · Darmstadt · Bad Homburg · Hanau</span>
+</div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/"><img src="https://base44.app/api/apps/6a5b599252635f13ffc0d0c2/files/mp/public/6a5b599252635f13ffc0d0c2/7faf24086_HolzbauLokal-Logo.png" alt="Holzbau Lokal" style="height:30px;width:auto;display:block;opacity:.85;"></a>
+  <div class="footer-note">© 2026 Holzbau Lokal — Ein Projekt von Lokale Marktmacht</div>
+  <div class="footer-links">
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://www.holzbau-lokal.de/#kontakt">Holzbau-Experte</a>
+  </div>
+</footer>
+
+</body>
+</html>
